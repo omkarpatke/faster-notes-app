@@ -1,0 +1,103 @@
+
+.login-container{
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+    height: 111vh;
+}
+
+.login-container h3{
+    padding-top: 1rem;
+    font-size: 1.8rem;
+}
+
+.login-card{
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+    padding: 1rem 3rem 2rem 3rem;
+    margin: 1rem 3rem;
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px 10px rgba(0,0,0,0.1);
+    background-color: var(--white-color);
+    cursor: pointer;
+    transition: .3s all ease-in-out;
+    line-height: 2;
+}
+
+.signIn-card:hover{
+    box-shadow: 2px 2px 14px 14px rgba(0,0,0,0.1);
+}
+
+
+.logIn-form{
+    display: flex;
+    flex-direction: column;
+}
+
+.logIn-form label span{
+    color: var(--danger-color);
+}
+
+.logIn-form label{
+    font-size: 1.2rem;
+}
+
+.logIn-form input{
+    min-width: 18rem;
+    padding: 7px 0 7px 10px;
+    font-size: 14px;
+}
+
+#login-confirm-password{
+    margin-bottom: 1.5rem;
+}
+
+.forgot-password-link{
+    color: var(--primary-color);
+    margin-bottom: 1.4rem;
+}
+
+.forgot-password-link:hover{
+    color: var(--danger-color);
+}
+
+.login-btn{
+    padding: 8px 2.4rem;
+    width: max-content;
+    margin: 3px auto;
+    border-radius: 1rem;
+    border: none;
+    font-size: 1rem;
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    transition: .8s all ease-in-out;
+    cursor: pointer;
+}
+
+.login-btn:hover{
+    background-color: #000;
+}
+
+.signUp-with-google-btn{
+    padding: 5px 2.4rem;
+    width: max-content;
+    margin: 0 auto;
+    border-radius: 1rem;
+    border: none;
+    font-size: 1rem;
+    background-color: var(--google-bg-color);
+    color: var(--white-color);
+    transition: .8s all ease-in-out;
+}
+
+.signUp-with-google-btn span{
+    color: var(--white-color);
+}
+
+.signUp-with-google-btn:hover{
+    background-color: var(--facebook-bg-color);
+    color: var(--white-color);
+}
