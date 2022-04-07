@@ -1,13 +1,13 @@
 import React from 'react';
-import './archive.css';
+import './Label.css';
 import PinImg from '../../Images/pin.svg';
 
-
-export default function Archive() {
+export default function Label() {
   return (
+    <>
     <div className="notes-container">
-      <input className='search-bar' type="search" name="search" id="search" placeholder='Search...' />
-        <h3>Archive</h3>
+    <input className='search-bar' type="search" name="search" id="search" placeholder='Search...' />
+        <h3>Label</h3>
         <div className="pinned-notes">
 
           <div className="note">
@@ -25,5 +25,6 @@ export default function Archive() {
 
         </div>
     </div>
+    </>
   )
 }

@@ -6,6 +6,10 @@ import Login from "./Pages/Login/Login";
 import SignUp from "./Pages/SignUp/SignUp";
 import Mockman from 'mockman-js';
 import Archive from "./Pages/archivePage/archive";
+import Trash from "./Pages/Trash/trash";
+import Label from "./Pages/Label/Label";
+import Account from "./Pages/Account/Account";
+import Sidebar from "./components/Sidebar/Sidebar";
 
 
 
@@ -14,12 +18,20 @@ function App() {
     <div className="App">
       <Navbar />
       <Routes>
-        <Route path="" element={<NotesPage />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/sign-up" element={<SignUp />}></Route>
         <Route path="/mock" element={<Mockman />}></Route>
-        <Route path="/archive" element={<Archive />}></Route>
       </Routes>
+      <div className="notepage-container">
+        <Sidebar />
+        <Routes>
+        <Route path="/" element={<NotesPage />}></Route>
+        <Route path="/archive" element={<Archive />}></Route>
+        <Route path="/account" element={<Account />}></Route>
+        <Route path="/label" element={<Label />}></Route>
+        <Route path="/trash" element={<Trash />}></Route>
+        </Routes>
+      </div>
     </div>
   );
 }
