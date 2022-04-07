@@ -5,6 +5,7 @@ import PinLight from '../../Images/pin-light.png';
 import {  useNavigate , NavLink } from 'react-router-dom'
 import { useNote } from '../../context/note-context';
 import { addNoteToBackend } from '../../api-calls/api-calls';
+import axios from 'axios';
 
 export default function NotesPage() {
   const navigate = useNavigate();
@@ -42,11 +43,20 @@ export default function NotesPage() {
         closeForm();
       },500)
      }else{
+         
          navigate('/login');
      }
      
    }
 
+
+   const deleteNote = async(note) => {
+     const encodedToken = localStorage.getItem('token');
+        try{ await axios.delete(`/api/notes/${note._id}` , {headers : {authorization : encodedToken}} , {note})}
+        catch (err) {
+          console.log(err)
+        }
+   }
    
 
   return (
@@ -101,7 +111,7 @@ export default function NotesPage() {
               <div className="note-icon"><i className="note-icon-paint lni lni-paint-roller"></i></div>
               <div className="note-icon"><i className="note-icon-archive lni lni-archive"></i></div>
               <div className="note-icon"><i className="note-icon-label lni lni-tag"></i></div>
-              <div className="note-icon"><i className="note-icon-trash lni lni-trash-can"></i></div>
+              <div className="note-icon"><i onClick={() => deleteNote(note)} className="note-icon-trash lni lni-trash-can"></i></div>
           </div>
       </div>
         ))}
