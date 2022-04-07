@@ -5,6 +5,7 @@ import NotesPage from "./Pages/NotesPage/NotesPage";
 import Login from "./Pages/Login/Login";
 import SignUp from "./Pages/SignUp/SignUp";
 import Mockman from 'mockman-js';
+import Archive from "./Pages/archivePage/archive";
 
 
 
@@ -17,6 +18,7 @@ function App() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/sign-up" element={<SignUp />}></Route>
         <Route path="/mock" element={<Mockman />}></Route>
+        <Route path="/archive" element={<Archive />}></Route>
       </Routes>
     </div>
   );
