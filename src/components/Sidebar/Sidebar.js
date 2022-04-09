@@ -32,14 +32,14 @@ export default function Sidebar() {
         desc,
         time:new Date().toLocaleString(),
       }
-      console.log(note)
       setTitle('');
       setDesc('');
       addNoteToBackend(note);
       setTimeout(() => {
         closeForm();
-      },500)
+      },200)
      }else{
+         closeForm();
          navigate('/login');
      }
      
@@ -55,7 +55,7 @@ export default function Sidebar() {
     </form>
 
     <div className="sidebar">
-      <NavLink to='' style={activeStyle} className='sidebar-link'><i className="lni lni-home"></i>  Home</NavLink>
+      <NavLink to='/' style={activeStyle} className='sidebar-link'><i className="lni lni-home"></i>  Home</NavLink>
       <NavLink to='/archive' style={activeStyle} className='sidebar-link'><i className="lni lni-archive"></i>  Archive</NavLink>
       <NavLink to='/trash' style={activeStyle} className='sidebar-link'><i className="lni lni-trash-can"></i>  Trash</NavLink>
       <NavLink to='/label' style={activeStyle} className='sidebar-link'><i className="lni lni-tag"></i>  Label</NavLink>
