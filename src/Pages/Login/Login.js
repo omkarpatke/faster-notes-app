@@ -19,9 +19,9 @@ export default function Login() {
         email , password
       });
       if(response.status === 200){
+        localStorage.setItem("token", response.data.encodedToken);
         setIsLogin(true);
         navigate('/');
-        localStorage.setItem("token", response.data.encodedToken);
       }
       // saving the encodedToken in the localStorage
       

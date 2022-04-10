@@ -2,11 +2,11 @@ import React , {useState} from 'react';
 import './Sidebar.css';
 import {  useNavigate , NavLink } from 'react-router-dom'
 import { useNote } from '../../context/note-context';
-import { addNoteToBackend } from '../../api-calls/api-calls';
+
 
 export default function Sidebar() {
     const navigate = useNavigate();
-    const { isLogin } = useNote();
+    const { isLogin , addNoteToBackend } = useNote();
     const [showForm , setShowForm] = useState(false);
     const [title , setTitle] = useState('');
     const [desc , setDesc] = useState('');

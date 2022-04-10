@@ -29,8 +29,25 @@ const NoteContextProvider = ({children}) => {
     const { state , dispatch } = useReducer(reducer , {type:'' , payload:''});
     const [notes , setNotes] = useState([]);
     const [isLogin , setIsLogin] = useState(false);
-    const encodedToken = localStorage.getItem('token');
     
+
+    const addNoteToBackend = async(note) => {
+        try {
+             await axios.post('/api/notes' , {note} 
+             ,{
+                headers: {
+                    authorization: encodedToken
+                }
+            }
+            )
+            console.log(encodedToken)
+        } catch (err) {
+            console.log(err);
+        }
+    }
+   
+    
+    const encodedToken = localStorage.getItem('token');
     useEffect(() => {
         const getNotes = async() => {
             try {
@@ -50,7 +67,7 @@ const NoteContextProvider = ({children}) => {
     
 
 
-    return (<NoteContext.Provider value={{state , dispatch ,notes , isLogin , setIsLogin }}>{children}</NoteContext.Provider>)
+    return (<NoteContext.Provider value={{state , dispatch ,notes , isLogin , setIsLogin , addNoteToBackend }}>{children}</NoteContext.Provider>)
 }
 
 export {useNote , NoteContextProvider}
