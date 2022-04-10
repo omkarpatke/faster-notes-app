@@ -16,7 +16,8 @@
     display: flex;
     flex-direction: column;
     min-width: 35rem;
-    min-height: 8rem;
+    max-width: 40rem;
+    min-height: 10rem;
     max-height: auto;
     background-color: var(--white-color);
     padding: 1rem 1rem;
@@ -34,6 +35,11 @@
     line-height: 2;
 }
 
+.lni-pin{
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
 .pinned-icon{
     text-align: end;
     cursor: pointer;
@@ -43,11 +49,12 @@
 .title{
     font-size: 1.3rem;
     margin-bottom: 1rem;
-    margin-top: -1.5rem;
+    margin-top: -0.5rem;
 }
 
 .decs{
     margin-top: 1rem;
+    white-space: normal;
 }
 
 .note-icons{
@@ -59,14 +66,14 @@
     margin-top: 1rem;
 }
 
-.note-icons .note-icon:hover{
-    cursor: pointer;
+.note-date{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
 }
 
-.note-date{
-    position: relative;
-    top: 2.5rem;
-}
 
 .pinned-notes{
     display: flex;
@@ -80,8 +87,32 @@
     gap: 1rem;
 }
 
-.note-icon-paint:hover{
+.lni-paint-roller:hover{
+    color: var(--primary-dark-color);
     cursor: pointer;
+    transition: .4s all ease-in-out;
+    transform: scale(1.2);
+}
+
+.lni-archive:hover{
+    color: var(--primary-dark-color);
+    cursor: pointer;
+    transition: .4s all ease-in-out;
+    transform: scale(1.2);
+}
+
+.lni-trash-can:hover{
+    color: red;
+    cursor: pointer;
+    transition: .4s all ease-in-out;
+    transform: scale(1.2);
+}
+
+.lni-tag:hover{
+    color: var(--primary-dark-color);
+    cursor: pointer;
+    transition: .4s all ease-in-out;
+    transform: scale(1.2);
 }
 
  /* Note Cart */

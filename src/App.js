@@ -25,7 +25,7 @@ function App() {
       <div className="notepage-container">
         <Sidebar />
         <Routes>
-        <Route path="/" element={<NotesPage />}></Route>
+        <Route path="" element={<NotesPage />}></Route>
         <Route path="/archive" element={<Archive />}></Route>
         <Route path="/account" element={<Account />}></Route>
         <Route path="/label" element={<Label />}></Route>

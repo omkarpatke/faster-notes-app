@@ -1,28 +1,32 @@
 import React from 'react';
 import './archive.css';
-import PinImg from '../../Images/pin.svg';
+import { useArchiveNote } from '../../context/archive-note-context';
 
 
 export default function Archive() {
+  const archiveNotes = useArchiveNote();
+  const { reStoreArchiveNote , deleteArchiveNote } = useArchiveNote();
+  const allArchiveNotes = archiveNotes.archiveNotes;
   return (
     <div className="notes-container">
       <input className='search-bar' type="search" name="search" id="search" placeholder='Search...' />
         <h3>Archive</h3>
         <div className="pinned-notes">
-
-          <div className="note">
-              <div className="pinned-icon"><img className='pin-icon' src={PinImg} alt="pin-tag" /></div>
-              <div className="title">Title of the note</div>
-              <div className="desc">Body of the Note</div>
-              <div className="note-date">Created on 26/12/2021</div>
-              <div className="note-icons">
-                  <div className="note-icon"><i className="note-icon-paint lni lni-paint-roller"></i></div>
-                  <div className="note-icon"><i className="note-icon-archive lni lni-archive"></i></div>
-                  <div className="note-icon"><i className="note-icon-label lni lni-tag"></i></div>
-                  <div className="note-icon"><i className="note-icon-trash lni lni-trash-can"></i></div>
-              </div>
-          </div>
-
+          {allArchiveNotes.length === 0 ? "No Archive Notes" : allArchiveNotes.map((archiveNote) => (
+             <div className="note" key={archiveNote._id}>
+             <div className="title">{archiveNote.title}</div>
+             <div className="desc">{archiveNote.desc}</div>
+             <div className="note-date">{archiveNote.time} 
+             <span className="note-icons">
+                 <i className="lni lni-paint-roller" title='Add Background'></i>
+                 <i className="lni lni-archive" title='Restore Archive Note' onClick={() => reStoreArchiveNote(archiveNote)}></i>
+                 <i className="lni lni-tag" title='Add Label'></i>
+                 <i className="lni lni-trash-can" title='Delete Note' onClick={() => deleteArchiveNote(archiveNote)}></i>
+             </span>
+             </div>
+         </div>
+          ))}
+          
         </div>
     </div>
   )
