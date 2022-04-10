@@ -65,7 +65,7 @@ const ArchiveContextProvider = ({children}) => {
         }
        }
        getArchiveNotes();
-   },[])
+   })
 
 
     return (<ArchiveContext.Provider value={{ archiveNotes , addToArchiveNotes , reStoreArchiveNote ,deleteArchiveNote }}>{children}</ArchiveContext.Provider>)
