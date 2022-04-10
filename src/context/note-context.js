@@ -33,14 +33,11 @@ const NoteContextProvider = ({children}) => {
 
     const addNoteToBackend = async(note) => {
         try {
-             await axios.post('/api/notes' , {note} 
-             ,{
+             await axios.post('/api/notes' , {note} ,{
                 headers: {
                     authorization: encodedToken
                 }
-            }
-            )
-            console.log(encodedToken)
+            })
         } catch (err) {
             console.log(err);
         }
