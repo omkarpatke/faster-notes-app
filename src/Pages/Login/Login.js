@@ -1,4 +1,4 @@
-import React from 'react';
+import React , { useState } from 'react';
 import axios from 'axios';
 import './Login.css';
 import { Link, useNavigate } from 'react-router-dom';
@@ -6,23 +6,33 @@ import { useNote } from '../../context/note-context';
 
 export default function Login() {
    const navigate = useNavigate();
+   const [email , setEmail] = useState();
+   const [password , setPassword] = useState();
+
+
    const { setIsLogin } = useNote();
-    const loginAsGuest = async () => {
-      try {
-        const response = await axios.post(`/api/auth/login`, {
-          email: "adarshbalika@gmail.com",
-          password: "adarshBalika123",
-        });
-        if(response.status === 200){
-          setIsLogin(true);
-          navigate('/');
-        }
-        // saving the encodedToken in the localStorage
+
+   const loginHandler = async(e) => {
+     e.preventDefault();
+    try {
+      const response = await axios.post(`/api/auth/login`, {
+        email , password
+      });
+      if(response.status === 200){
         localStorage.setItem("token", response.data.encodedToken);
-        
-      } catch (error) {
-        console.log(error);
+        setIsLogin(true);
+        navigate('/');
       }
+      // saving the encodedToken in the localStorage
+      
+    } catch (error) {
+      console.log(error);
+    }
+   }
+
+    const loginAsGuest = () => {
+      setEmail('adarshbalika@gmail.com')
+      setPassword('adarshBalika123')
     };
 
   return (
@@ -31,16 +41,16 @@ export default function Login() {
         <h3 className="login-heading">Account Information</h3>
         <div className="login-card">
             <h2>LogIn</h2>
-            <form className="logIn-form">
+            <form className="logIn-form" onSubmit={loginHandler}>
                 <label htmlFor='login-eamil-input' aria-required="true">E-mail address<span>*</span></label>
-                <input type="email" name="user-email" id="login-eamil-input"/>
+                <input type="email" name="user-email" id="login-eamil-input" value={email} onChange={e => setEmail(e.target.value)}/>
 
                 <label htmlFor='login-password' aria-required="true">Password<span>*</span></label>
-                <input type="password" name="login-password" id="login-password"/>
+                <input type="password" name="login-password" id="login-password" value={password} onChange={e => setPassword(e.target.value)}/>
 
                 <button className="forgot-password-link">Forgot your password?</button>
 
-                <button className="login-btn" type="submit"> Login In </button>
+                <button className="login-btn" type="submit" onClick={loginHandler}> Login In </button>
             </form>
             <button className="login-btn" onClick={() => loginAsGuest()}> LogIn as Guest</button>
             <h2>OR</h2>

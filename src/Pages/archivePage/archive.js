@@ -1,9 +1,33 @@
 import React from 'react';
 import './archive.css';
+import { useArchiveNote } from '../../context/archive-note-context';
 
 
 export default function Archive() {
+  const archiveNotes = useArchiveNote();
+  const { reStoreArchiveNote , deleteArchiveNote } = useArchiveNote();
+  const allArchiveNotes = archiveNotes.archiveNotes;
   return (
-    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro sed iure reprehenderit debitis veniam incidunt optio amet recusandae vel, officia mollitia laborum voluptas vitae id dignissimos iusto magnam aperiam quas voluptate asperiores. Esse dolorem explicabo ullam in corrupti enim quia labore. Cumque expedita dolores laborum eius temporibus facilis ut non eveniet iusto quod dolorem fuga molestiae voluptate, similique eos doloremque aliquid sapiente accusamus? Maiores voluptatum accusamus quia nam sunt incidunt ullam, adipisci magnam optio dolorum in molestiae delectus fugiat voluptas soluta illo perferendis eum, laudantium id natus voluptates est nisi. Porro atque libero, ipsum exercitationem beatae cumque magni vero autem.</div>
+    <div className="notes-container">
+      <input className='search-bar' type="search" name="search" id="search" placeholder='Search...' />
+        <h3>Archive</h3>
+        <div className="pinned-notes">
+          {allArchiveNotes.length === 0 ? "No Archive Notes" : allArchiveNotes.map((archiveNote) => (
+             <div className="note" key={archiveNote._id}>
+             <div className="title">{archiveNote.title}</div>
+             <div className="desc">{archiveNote.desc}</div>
+             <div className="note-date">{archiveNote.time} 
+             <span className="note-icons">
+                 <i className="lni lni-paint-roller" title='Add Background'></i>
+                 <i className="lni lni-archive" title='Restore Archive Note' onClick={() => reStoreArchiveNote(archiveNote)}></i>
+                 <i className="lni lni-tag" title='Add Label'></i>
+                 <i className="lni lni-trash-can" title='Delete Note' onClick={() => deleteArchiveNote(archiveNote)}></i>
+             </span>
+             </div>
+         </div>
+          ))}
+          
+        </div>
+    </div>
   )
 }
