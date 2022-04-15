@@ -13,10 +13,10 @@ export default function SignUp() {
     e.preventDefault();
     try {
       const response = await axios.post(`/api/auth/signup`, JSON.stringify({
-        firstName: "Adarsh",
-        lastName: "Balika",
-        email: "adarshbalika@gmail.com",
-        password: "adarshBalika",
+        firstName: name,
+        lastName: lastName,
+        email: email,
+        password: password,
       }));
       console.log(response)
       // saving the encodedToken in the localStorage
@@ -32,8 +32,8 @@ export default function SignUp() {
         <div className="login-card">
             <h2>Sign Up</h2>
             <form className="logIn-form">
-                <label htmlFor="full-name" aria-required="true">Full Name<span>*</span></label>
-                <input type="text" name="ful-name" id="full-name" value={name} onChange={ e => setName(e.target.value)}/>
+                <label htmlFor="first-name" aria-required="true">First Name<span>*</span></label>
+                <input type="text" name="first-name" id="first-name" value={name} onChange={ e => setName(e.target.value)}/>
 
                 <label htmlFor="last-name" aria-required="true"> Last Name<span>*</span></label>
                 <input type="text" name="last-name" id="last-name" value={lastName} onChange={ e => setLastName(e.target.value)}/>

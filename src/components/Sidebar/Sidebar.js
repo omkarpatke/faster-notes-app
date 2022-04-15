@@ -30,6 +30,7 @@ export default function Sidebar() {
       const note = {
         title,
         desc,
+        bgColor: '',
         time:new Date().toLocaleString(),
       }
       setTitle('');

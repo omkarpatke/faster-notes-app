@@ -64,7 +64,7 @@ const NoteContextProvider = ({children}) => {
     
 
 
-    return (<NoteContext.Provider value={{state , dispatch ,notes , isLogin , setIsLogin , addNoteToBackend }}>{children}</NoteContext.Provider>)
+    return (<NoteContext.Provider value={{state , dispatch ,notes ,setNotes, isLogin , setIsLogin , addNoteToBackend }}>{children}</NoteContext.Provider>)
 }
 
 export {useNote , NoteContextProvider}

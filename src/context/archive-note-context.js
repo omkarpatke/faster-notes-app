@@ -16,9 +16,11 @@ const ArchiveContextProvider = ({children}) => {
                 authorization: encodedToken
             }
         })
-        setArchiveNotes(response.data.archives);
+        if(response.status === 200){
+            setArchiveNotes(response.data.archives);
+        }
     } catch (err) {
-        console.log(err);
+        console.error(err);
     }
    }
 
@@ -37,8 +39,9 @@ const ArchiveContextProvider = ({children}) => {
    }
 
    const deleteArchiveNote = async(note) => {
+       console.log(note._id)
     try {
-        const response = await axios.delete(`/api/archives/delete/${note._id}` , {note} ,
+        const response = await axios.delete(`/api/archives/delete/${note._id}`,
         {
             headers: {
                 authorization: encodedToken
@@ -46,10 +49,11 @@ const ArchiveContextProvider = ({children}) => {
         })
         console.log(response);
     } catch (err) {
-        console.log(err);
+        console.error(err);
     }
    }
 
+   
    useEffect(() => {
        const getArchiveNotes = async() => {
         try {

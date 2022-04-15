@@ -101,6 +101,13 @@
     transform: scale(1.2);
 }
 
+.lni-inbox:hover{
+    color: var(--primary-dark-color);
+    cursor: pointer;
+    transition: .4s all ease-in-out;
+    transform: scale(1.2);
+}
+
 .lni-trash-can:hover{
     color: red;
     cursor: pointer;
@@ -109,6 +116,13 @@
 }
 
 .lni-tag:hover{
+    color: var(--primary-dark-color);
+    cursor: pointer;
+    transition: .4s all ease-in-out;
+    transform: scale(1.2);
+}
+
+.lni-write:hover{
     color: var(--primary-dark-color);
     cursor: pointer;
     transition: .4s all ease-in-out;
@@ -162,5 +176,9 @@
 
  .close-btn{
      margin-left: 22rem;
+ }
+
+ .bg-input{
+     cursor: pointer;
  }
 
