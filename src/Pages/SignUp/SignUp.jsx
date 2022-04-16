@@ -1,26 +1,32 @@
 import React , { useState } from 'react';
 import './SignUp.css';
-import { Link } from 'react-router-dom';
+import { Link , useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useNote } from '../../context/note-context';
 
 export default function SignUp() {
   const [name , setName] = useState('');
   const [email , setEmail] = useState('');
   const [password , setPassword] = useState('');
   const [lastName , setLastName] = useState('');
+  const navigate = useNavigate();
+  const { setIsLogin } = useNote();
 
   const signupHandler = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`/api/auth/signup`, JSON.stringify({
+      const response = await axios.post(`/api/auth/signup`, ({
         firstName: name,
         lastName: lastName,
         email: email,
         password: password,
       }));
-      console.log(response)
       // saving the encodedToken in the localStorage
+      if(response.status === 201){
       localStorage.setItem("token", response.data.encodedToken);
+      setIsLogin(true);
+      navigate('/');
+      }
     } catch (error) {
       console.log(error);
     }
