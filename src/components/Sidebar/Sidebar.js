@@ -42,8 +42,7 @@ export default function Sidebar() {
      }else{
          closeForm();
          navigate('/login');
-     }
-     
+     } 
    }
   return (
     <>

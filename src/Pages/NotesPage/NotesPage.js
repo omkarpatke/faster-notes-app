@@ -1,14 +1,12 @@
-import React , { useState } from 'react';
 import './NotesPage.css';
 import { useNote } from '../../context/note-context';
 import axios from 'axios';
 import { useArchiveNote } from '../../context/archive-note-context';
 
 export default function NotesPage() {
-  const { notes , setNotes , addNoteToBackend } = useNote();
+  const { notes , setNotes , addNoteToBackend ,pinNotes , setPinNotes } = useNote();
   const { addToArchiveNotes } = useArchiveNote();
   const encodedToken = localStorage.getItem('token');
-  const [pinNotes , setPinNotes] = useState([]);
 
   
    const deleteNote = async(note) => {
@@ -29,7 +27,7 @@ export default function NotesPage() {
 
    const unPinnedNote = (note) => {
     addNoteToBackend(note);
-    setPinNotes( prev => console.log(prev));
+    setPinNotes( prev => prev.filter( prevNote => prevNote._id !== note._id ));
   }
 
    

@@ -28,6 +28,7 @@ const NoteContextProvider = ({children}) => {
 
     const { state , dispatch } = useReducer(reducer , {type:'' , payload:''});
     const [notes , setNotes] = useState([]);
+    const [pinNotes , setPinNotes] = useState([]);
     const [isLogin , setIsLogin] = useState(false);
     
 
@@ -64,7 +65,7 @@ const NoteContextProvider = ({children}) => {
     
 
 
-    return (<NoteContext.Provider value={{state , dispatch ,notes ,setNotes, isLogin , setIsLogin , addNoteToBackend }}>{children}</NoteContext.Provider>)
+    return (<NoteContext.Provider value={{state ,pinNotes,setPinNotes, dispatch ,notes ,setNotes, isLogin , setIsLogin , addNoteToBackend }}>{children}</NoteContext.Provider>)
 }
 
 export {useNote , NoteContextProvider}
