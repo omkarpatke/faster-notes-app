@@ -36,7 +36,7 @@ function App() {
         <ToastContainer 
         position="top-right"
         autoClose='1200'
-        theme="colored"
+        theme="light"
         />
       </div>
     </div>

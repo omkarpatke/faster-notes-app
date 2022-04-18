@@ -1,5 +1,6 @@
 import {createContext , useContext , useEffect , useState } from 'react';
 import axios from 'axios';
+import { useToastContext } from '../context/toastContext';
 
 const ArchiveContext = createContext('');
 const useArchiveNote = () => useContext(ArchiveContext);
@@ -7,6 +8,7 @@ const useArchiveNote = () => useContext(ArchiveContext);
 const ArchiveContextProvider = ({children}) => {
    const [archiveNotes , setArchiveNotes] = useState([]);
    const encodedToken = localStorage.getItem('token');
+   const notify = useToastContext();
 
    const addToArchiveNotes = async(note) => {
     try {
@@ -17,6 +19,7 @@ const ArchiveContextProvider = ({children}) => {
             }
         })
         if(response.status === 200){
+            notify("Added In Archive Notes" , {type:'success'});
             setArchiveNotes(response.data.archives);
         }
     } catch (err) {
@@ -39,15 +42,16 @@ const ArchiveContextProvider = ({children}) => {
    }
 
    const deleteArchiveNote = async(note) => {
-       console.log(note._id)
     try {
         const response = await axios.delete(`/api/archives/delete/${note._id}`,
         {
             headers: {
                 authorization: encodedToken
             }
-        })
-        console.log(response);
+        });
+        if(response.status){
+            notify("Remove Archive Notes" , {type:'success'});
+        }
     } catch (err) {
         console.error(err);
     }
