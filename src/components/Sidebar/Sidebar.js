@@ -2,6 +2,7 @@ import React , {useState} from 'react';
 import './Sidebar.css';
 import {  useNavigate , NavLink } from 'react-router-dom'
 import { useNote } from '../../context/note-context';
+import { useToastContext } from '../../context/toastContext';
 
 
 export default function Sidebar() {
@@ -10,15 +11,14 @@ export default function Sidebar() {
     const [showForm , setShowForm] = useState(false);
     const [title , setTitle] = useState('');
     const [desc , setDesc] = useState('');
+    const notify = useToastContext();
 
     const activeStyle = ({isActive}) =>  {
         return {fontWeight : isActive ? "600" : "500"}
     }
     
-    const createNewNote = () => {
-       setShowForm(true);
-       
-    }
+    const createNewNote = () => isLogin ? setShowForm(true) : notify("Please Login!" , {type:'info'});
+    
 
     const closeForm = () => {
       setShowForm(false);

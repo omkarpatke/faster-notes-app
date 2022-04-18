@@ -10,7 +10,10 @@ import Trash from "./Pages/Trash/trash";
 import Label from "./Pages/Label/Label";
 import Account from "./Pages/Account/Account";
 import Sidebar from "./components/Sidebar/Sidebar";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+toast.configure();
 
 function App() {
   return (
@@ -30,6 +33,11 @@ function App() {
         <Route path="/label" element={<Label />}></Route>
         <Route path="/trash" element={<Trash />}></Route>
         </Routes>
+        <ToastContainer 
+        position="top-right"
+        autoClose='1200'
+        theme="colored"
+        />
       </div>
     </div>
   );

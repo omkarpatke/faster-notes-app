@@ -3,12 +3,13 @@ import axios from 'axios';
 import './Login.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useNote } from '../../context/note-context';
+import { useToastContext } from '../../context/toastContext';
 
 export default function Login() {
    const navigate = useNavigate();
    const [email , setEmail] = useState();
    const [password , setPassword] = useState();
-
+   const notify = useToastContext();
 
    const { setIsLogin } = useNote();
 
@@ -20,10 +21,10 @@ export default function Login() {
       });
       if(response.status === 200){
         localStorage.setItem("token", response.data.encodedToken);
+        notify('You are Successfully LogIn!' , {type:'info'});
         setIsLogin(true);
         navigate('/');
       }
-      // saving the encodedToken in the localStorage
       
     } catch (error) {
       console.log(error);

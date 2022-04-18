@@ -3,6 +3,7 @@ import './SignUp.css';
 import { Link , useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useNote } from '../../context/note-context';
+import { useToastContext } from '../../context/toastContext';
 
 export default function SignUp() {
   const [name , setName] = useState('');
@@ -11,6 +12,7 @@ export default function SignUp() {
   const [lastName , setLastName] = useState('');
   const navigate = useNavigate();
   const { setIsLogin } = useNote();
+  const notify = useToastContext();
 
   const signupHandler = async (e) => {
     e.preventDefault();
@@ -24,6 +26,7 @@ export default function SignUp() {
       // saving the encodedToken in the localStorage
       if(response.status === 201){
       localStorage.setItem("token", response.data.encodedToken);
+      notify('You are Successfully Signup!' , {type:'info'});
       setIsLogin(true);
       navigate('/');
       }
