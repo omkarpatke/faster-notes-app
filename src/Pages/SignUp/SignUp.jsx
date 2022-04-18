@@ -16,23 +16,28 @@ export default function SignUp() {
 
   const signupHandler = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post(`/api/auth/signup`, ({
-        firstName: name,
-        lastName: lastName,
-        email: email,
-        password: password,
-      }));
-      // saving the encodedToken in the localStorage
-      if(response.status === 201){
-      localStorage.setItem("token", response.data.encodedToken);
-      notify('You are Successfully Signup!' , {type:'info'});
-      setIsLogin(true);
-      navigate('/');
+    if(name && lastName && email && password){
+      try {
+        const response = await axios.post(`/api/auth/signup`, ({
+          firstName: name,
+          lastName: lastName,
+          email: email,
+          password: password,
+        }));
+        // saving the encodedToken in the localStorage
+        if(response.status === 201){
+          localStorage.setItem("token", response.data.encodedToken);
+          notify('You are Successfully Signup!' , {type:'success'});
+          setIsLogin(true);
+          navigate('/');
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
+    }else{
+      alert('Enter Empty Fields');
     }
+    
   };
   return (
     <>
