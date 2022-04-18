@@ -1,12 +1,11 @@
 import React , {useState} from 'react';
 import './Sidebar.css';
-import {  useNavigate , NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { useNote } from '../../context/note-context';
 import { useToastContext } from '../../context/toastContext';
 
 
 export default function Sidebar() {
-    const navigate = useNavigate();
     const { isLogin , addNoteToBackend } = useNote();
     const [showForm , setShowForm] = useState(false);
     const [title , setTitle] = useState('');
@@ -26,7 +25,6 @@ export default function Sidebar() {
 
    const addNote = (e) => {
      e.preventDefault();
-     if(isLogin){
       const note = {
         title,
         desc,
@@ -38,12 +36,9 @@ export default function Sidebar() {
       addNoteToBackend(note);
       setTimeout(() => {
         closeForm();
-      },200)
-     }else{
-         closeForm();
-         navigate('/login');
-     } 
+      },200) 
    }
+   
   return (
     <>
     <form className="add-note-cart" style={{display: showForm ? 'flex' : 'none'}}>

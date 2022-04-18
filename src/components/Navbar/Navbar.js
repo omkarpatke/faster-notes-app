@@ -12,7 +12,7 @@ export default function Navbar() {
 
   const logoutHandler = () => {
      setIsLogin(false);
-     notify('You are Successfully Logout!' , {type:'info'});
+     notify('You are Successfully Logout!' , {type:'success'});
      setPinNotes([]);
      navigate('/');
      localStorage.clear();

@@ -17,11 +17,11 @@ const ArchiveContextProvider = ({children}) => {
             headers: {
                 authorization: encodedToken
             }
-        })
-        if(response.status === 200){
+        });
+        if(response.status === 201){
             notify("Added In Archive Notes" , {type:'success'});
             setArchiveNotes(response.data.archives);
-        }
+        }   
     } catch (err) {
         console.error(err);
     }
@@ -35,7 +35,11 @@ const ArchiveContextProvider = ({children}) => {
                 authorization: encodedToken
             }
         })
-        setArchiveNotes(response.data.archives);
+        if(response.status === 200 ){
+            setArchiveNotes(response.data.archives);
+            notify("Restore To Main Notes" , {type:'success'});
+        }
+        
     } catch (err) {
         console.log(err);
     }
@@ -49,7 +53,7 @@ const ArchiveContextProvider = ({children}) => {
                 authorization: encodedToken
             }
         });
-        if(response.status){
+        if(response.status === 200){
             notify("Remove Archive Notes" , {type:'success'});
         }
     } catch (err) {

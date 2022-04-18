@@ -22,7 +22,7 @@ export default function Login() {
         });
         if(response.status === 200){
           localStorage.setItem("token", response.data.encodedToken);
-          notify('You are Successfully LogIn!' , {type:'info'});
+          notify('You are Successfully LogIn!' , {type:'success'});
           setIsLogin(true);
           navigate('/');
         }
