@@ -19,7 +19,6 @@ const ArchiveContextProvider = ({children}) => {
             }
         });
         if(response.status === 201){
-            notify("Added In Archive Notes" , {type:'success'});
             setArchiveNotes(response.data.archives);
         }   
     } catch (err) {
@@ -37,7 +36,6 @@ const ArchiveContextProvider = ({children}) => {
         })
         if(response.status === 200 ){
             setArchiveNotes(response.data.archives);
-            notify("Restore To Main Notes" , {type:'success'});
         }
         
     } catch (err) {

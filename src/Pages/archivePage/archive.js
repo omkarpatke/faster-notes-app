@@ -1,6 +1,7 @@
 import React from 'react';
 import './archive.css';
 import { useArchiveNote } from '../../context/archive-note-context';
+import { useToastContext } from '../../context/toastContext';
 
 
 export default function Archive() {
@@ -8,9 +9,20 @@ export default function Archive() {
   const setArchiveNotes = useArchiveNote();
   const { reStoreArchiveNote , deleteArchiveNote } = useArchiveNote();
   const allArchiveNotes = archiveNotes.archiveNotes;
+  const notify = useToastContext();
 
   const changeBgColor = (e , archiveNote) => {
     setArchiveNotes(prev => prev.filter( note => note._id === archiveNote._id ? {...note , bgColor: e.target.value} : {...note , bgColor: ''}))
+  }
+
+  const restoreNote = (note) => {
+    reStoreArchiveNote(note);
+    notify("Restore To Main Notes" , {type:'success'});
+  }
+
+  const deleteNote = (note) => {
+    deleteArchiveNote(note);
+    notify("Remove Archive Notes" , {type:'success'});
   }
   return (
     <div className="notes-container">
@@ -24,9 +36,9 @@ export default function Archive() {
              <div className="note-date">{archiveNote.time} 
              <span className="note-icons">
                  <input type="color" className='bg-input' title='Add Background' onChange={(e) => changeBgColor(e,archiveNote)} />
-                 <i className="lni lni-inbox"  title='Restore Archive Note' onClick={() => reStoreArchiveNote(archiveNote)}></i>
+                 <i className="lni lni-inbox"  title='Restore Archive Note' onClick={() => restoreNote(archiveNote)}></i>
                  <i className="lni lni-tag" title='Add Label'></i>
-                 <i className="lni lni-trash-can" title='Delete Archive Note' onClick={() => deleteArchiveNote(archiveNote)}></i>
+                 <i className="lni lni-trash-can" title='Delete Archive Note' onClick={() => deleteNote(archiveNote)}></i>
              </span>
              </div>
          </div>
