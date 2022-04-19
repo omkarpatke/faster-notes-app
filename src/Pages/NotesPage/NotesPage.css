@@ -129,6 +129,13 @@
     transform: scale(1.2);
 }
 
+.lni-spinner-arrow:hover{
+    color: var(--primary-dark-color);
+    cursor: pointer;
+    transition: .4s all ease-in-out;
+    transform: scale(1.2);
+}
+
  /* Note Cart */
 
  .add-note-cart{
