@@ -40,7 +40,7 @@ const ArchiveContextProvider = ({children}) => {
         }
         
     } catch (err) {
-        console.log(err);
+        console.error(err);
     }
    }
 
@@ -72,7 +72,7 @@ const ArchiveContextProvider = ({children}) => {
             })
             setArchiveNotes(response.data.archives);
         } catch (err) {
-            console.log(err);
+            console.error(err);
         }
        }
        getArchiveNotes();

@@ -1,10 +1,9 @@
 import React from 'react';
 import './archive.css';
-import { useArchiveNote } from '../../context/archive-note-context';
-import { useToastContext } from '../../context/toastContext';
+import { useArchiveNote , useToastContext } from '../../context/index';
 
 
-export default function Archive() {
+export function Archive() {
   const archiveNotes = useArchiveNote();
   const setArchiveNotes = useArchiveNote();
   const { reStoreArchiveNote , deleteArchiveNote } = useArchiveNote();

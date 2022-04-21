@@ -4,7 +4,7 @@ import { createContext , useContext, useReducer } from 'react';
 const TrashContext = createContext('');
 const useTrashContext = () => useContext(TrashContext);
 
-const reducer = (accu , {type , payload}) => {
+const trashReducer = (accu , {type , payload}) => {
     switch(type){
         case 'ADD_TO_TRASH':
             return {...accu , trashNotes:[...accu.trashNotes , payload]}
@@ -18,7 +18,7 @@ const reducer = (accu , {type , payload}) => {
 }
  
 const TrashContextProvider = ({children}) => {
-    const [trashState, trashDispatch] = useReducer(reducer, {
+    const [trashState, trashDispatch] = useReducer(trashReducer, {
         trashNotes: [],
       });
 

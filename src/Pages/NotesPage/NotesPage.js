@@ -1,11 +1,7 @@
 import './NotesPage.css';
-import { useNote } from '../../context/note-context';
+import { useArchiveNote, useToastContext, useTrashContext, useNote } from '../../context/index';
 
-import { useArchiveNote } from '../../context/archive-note-context';
-import { useToastContext } from '../../context/toastContext';
-import { useTrashContext } from '../../context/trashContext';
-
-export default function NotesPage() {
+export function NotesPage() {
   const { notes , setNotes , addNoteToBackend ,pinNotes , setPinNotes , deleteNote } = useNote();
   const  { addToArchiveNotes }  = useArchiveNote();
   const notify = useToastContext();

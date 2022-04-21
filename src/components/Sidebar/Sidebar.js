@@ -5,7 +5,7 @@ import { useNote } from '../../context/note-context';
 import { useToastContext } from '../../context/toastContext';
 
 
-export default function Sidebar() {
+export function Sidebar() {
     const { isLogin , addNoteToBackend } = useNote();
     const [showForm , setShowForm] = useState(false);
     const [title , setTitle] = useState('');

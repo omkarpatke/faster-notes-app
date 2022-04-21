@@ -2,10 +2,10 @@ import React from 'react';
 import './HomePage.css';
 import PinImg from '../../Images/pin.svg';
 import PinLight from '../../Images/pin-light.png';
-import { useNote } from '../../context/note-context';
+import { useNote } from '../../context/index';
 import axios from 'axios';
 
-export default function HomePage() {
+export function HomePage() {
     const { notes } = useNote();
 
    const deleteNote = async(note) => {

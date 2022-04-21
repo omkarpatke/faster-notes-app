@@ -1,10 +1,8 @@
 import React from 'react';
 import './trash.css';
-import { useTrashContext } from '../../context/trashContext';
-import { useToastContext } from '../../context/toastContext';
-import { useNote } from '../../context/note-context';
+import { useToastContext , useNote , useTrashContext } from '../../context';
 
-export default function Trash() {
+export function Trash() {
   const { trashState , trashDispatch } = useTrashContext();
   const trashNotes = trashState.trashNotes;
   const notify = useToastContext();
