@@ -3,31 +3,37 @@ import axios from 'axios';
 import './Login.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useNote } from '../../context/note-context';
+import { useToastContext } from '../../context/toastContext';
 
 export default function Login() {
    const navigate = useNavigate();
    const [email , setEmail] = useState();
    const [password , setPassword] = useState();
-
+   const notify = useToastContext();
 
    const { setIsLogin } = useNote();
 
    const loginHandler = async(e) => {
      e.preventDefault();
-    try {
-      const response = await axios.post(`/api/auth/login`, {
-        email , password
-      });
-      if(response.status === 200){
-        localStorage.setItem("token", response.data.encodedToken);
-        setIsLogin(true);
-        navigate('/');
+     if(email && password){
+      try {
+        const response = await axios.post(`/api/auth/login`, {
+          email , password
+        });
+        if(response.status === 200){
+          localStorage.setItem("token", response.data.encodedToken);
+          notify('You are Successfully LogIn!' , {type:'success'});
+          setIsLogin(true);
+          navigate('/');
+        }
+        
+      } catch (error) {
+        console.log(error);
       }
-      // saving the encodedToken in the localStorage
-      
-    } catch (error) {
-      console.log(error);
+     }else{
+      alert('Enter Empty Fields');
     }
+  
    }
 
     const loginAsGuest = () => {

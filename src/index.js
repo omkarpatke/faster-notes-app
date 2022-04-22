@@ -6,6 +6,7 @@ import { makeServer } from "./server";
 import { BrowserRouter } from 'react-router-dom';
 import { NoteContextProvider } from "./context/note-context";
 import { ArchiveContextProvider } from "./context/archive-note-context";
+import { ToastContextProvider } from "./context/toastContext";
 
 // Call make Server
 makeServer();
@@ -15,7 +16,9 @@ ReactDOM.render(
     <BrowserRouter>
     <NoteContextProvider>
       <ArchiveContextProvider>
-      <App />
+        <ToastContextProvider>
+         <App />
+        </ToastContextProvider>
       </ArchiveContextProvider>
     </NoteContextProvider>
     </BrowserRouter>

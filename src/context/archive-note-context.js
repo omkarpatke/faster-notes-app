@@ -1,5 +1,6 @@
 import {createContext , useContext , useEffect , useState } from 'react';
 import axios from 'axios';
+import { useToastContext } from '../context/toastContext';
 
 const ArchiveContext = createContext('');
 const useArchiveNote = () => useContext(ArchiveContext);
@@ -7,6 +8,7 @@ const useArchiveNote = () => useContext(ArchiveContext);
 const ArchiveContextProvider = ({children}) => {
    const [archiveNotes , setArchiveNotes] = useState([]);
    const encodedToken = localStorage.getItem('token');
+   const notify = useToastContext();
 
    const addToArchiveNotes = async(note) => {
     try {
@@ -15,10 +17,12 @@ const ArchiveContextProvider = ({children}) => {
             headers: {
                 authorization: encodedToken
             }
-        })
-        setArchiveNotes(response.data.archives);
+        });
+        if(response.status === 201){
+            setArchiveNotes(response.data.archives);
+        }   
     } catch (err) {
-        console.log(err);
+        console.error(err);
     }
    }
 
@@ -30,7 +34,10 @@ const ArchiveContextProvider = ({children}) => {
                 authorization: encodedToken
             }
         })
-        setArchiveNotes(response.data.archives);
+        if(response.status === 200 ){
+            setArchiveNotes(response.data.archives);
+        }
+        
     } catch (err) {
         console.log(err);
     }
@@ -38,18 +45,21 @@ const ArchiveContextProvider = ({children}) => {
 
    const deleteArchiveNote = async(note) => {
     try {
-        const response = await axios.delete(`/api/archives/delete/${note._id}` , {note} ,
+        const response = await axios.delete(`/api/archives/delete/${note._id}`,
         {
             headers: {
                 authorization: encodedToken
             }
-        })
-        console.log(response);
+        });
+        if(response.status === 200){
+            notify("Remove Archive Notes" , {type:'success'});
+        }
     } catch (err) {
-        console.log(err);
+        console.error(err);
     }
    }
 
+   
    useEffect(() => {
        const getArchiveNotes = async() => {
         try {

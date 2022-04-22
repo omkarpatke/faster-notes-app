@@ -1,29 +1,43 @@
 import React , { useState } from 'react';
 import './SignUp.css';
-import { Link } from 'react-router-dom';
+import { Link , useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useNote } from '../../context/note-context';
+import { useToastContext } from '../../context/toastContext';
 
 export default function SignUp() {
   const [name , setName] = useState('');
   const [email , setEmail] = useState('');
   const [password , setPassword] = useState('');
   const [lastName , setLastName] = useState('');
+  const navigate = useNavigate();
+  const { setIsLogin } = useNote();
+  const notify = useToastContext();
 
   const signupHandler = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post(`/api/auth/signup`, JSON.stringify({
-        firstName: "Adarsh",
-        lastName: "Balika",
-        email: "adarshbalika@gmail.com",
-        password: "adarshBalika",
-      }));
-      console.log(response)
-      // saving the encodedToken in the localStorage
-      localStorage.setItem("token", response.data.encodedToken);
-    } catch (error) {
-      console.log(error);
+    if(name && lastName && email && password){
+      try {
+        const response = await axios.post(`/api/auth/signup`, ({
+          firstName: name,
+          lastName: lastName,
+          email: email,
+          password: password,
+        }));
+        // saving the encodedToken in the localStorage
+        if(response.status === 201){
+          localStorage.setItem("token", response.data.encodedToken);
+          notify('You are Successfully Signup!' , {type:'success'});
+          setIsLogin(true);
+          navigate('/');
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }else{
+      alert('Enter Empty Fields');
     }
+    
   };
   return (
     <>
@@ -32,8 +46,8 @@ export default function SignUp() {
         <div className="login-card">
             <h2>Sign Up</h2>
             <form className="logIn-form">
-                <label htmlFor="full-name" aria-required="true">Full Name<span>*</span></label>
-                <input type="text" name="ful-name" id="full-name" value={name} onChange={ e => setName(e.target.value)}/>
+                <label htmlFor="first-name" aria-required="true">First Name<span>*</span></label>
+                <input type="text" name="first-name" id="first-name" value={name} onChange={ e => setName(e.target.value)}/>
 
                 <label htmlFor="last-name" aria-required="true"> Last Name<span>*</span></label>
                 <input type="text" name="last-name" id="last-name" value={lastName} onChange={ e => setLastName(e.target.value)}/>
