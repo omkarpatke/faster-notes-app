@@ -4,9 +4,7 @@ import "./index.css";
 import App from "./App";
 import { makeServer } from "./server";
 import { BrowserRouter } from 'react-router-dom';
-import { NoteContextProvider } from "./context/note-context";
-import { ArchiveContextProvider } from "./context/archive-note-context";
-import { ToastContextProvider } from "./context/toastContext";
+import { NoteContextProvider, TrashContextProvider, ToastContextProvider, ArchiveContextProvider } from "./context/index";
 
 // Call make Server
 makeServer();
@@ -17,7 +15,9 @@ ReactDOM.render(
     <NoteContextProvider>
       <ArchiveContextProvider>
         <ToastContextProvider>
-         <App />
+          <TrashContextProvider>
+           <App />
+          </TrashContextProvider>
         </ToastContextProvider>
       </ArchiveContextProvider>
     </NoteContextProvider>

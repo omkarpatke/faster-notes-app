@@ -5,7 +5,7 @@ import { useNote } from '../../context/note-context';
 import { useToastContext } from '../../context/toastContext';
 
 
-export default function Navbar() {
+export function Navbar() {
   const { isLogin, setIsLogin , setPinNotes } = useNote();
   const navigate = useNavigate();
   const notify = useToastContext();

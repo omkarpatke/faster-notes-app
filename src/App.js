@@ -1,15 +1,8 @@
 import "./App.css";
-import Navbar from "./components/Navbar/Navbar";
 import { Routes , Route } from 'react-router-dom';
-import NotesPage from "./Pages/NotesPage/NotesPage";
-import Login from "./Pages/Login/Login";
-import SignUp from "./Pages/SignUp/SignUp";
 import Mockman from 'mockman-js';
-import Archive from "./Pages/archivePage/archive";
-import Trash from "./Pages/Trash/trash";
-import Label from "./Pages/Label/Label";
-import Account from "./Pages/Account/Account";
-import Sidebar from "./components/Sidebar/Sidebar";
+import { Navbar, Sidebar } from "./components/index";
+import { Account, NotesPage, Login, SignUp, Archive, Trash, Label } from "./Pages/index";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

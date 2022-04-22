@@ -2,10 +2,10 @@ import React , { useState } from 'react';
 import './SignUp.css';
 import { Link , useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useNote } from '../../context/note-context';
-import { useToastContext } from '../../context/toastContext';
+import { useNote, useToastContext } from '../../context/index';
 
-export default function SignUp() {
+
+export function SignUp() {
   const [name , setName] = useState('');
   const [email , setEmail] = useState('');
   const [password , setPassword] = useState('');
@@ -32,7 +32,7 @@ export default function SignUp() {
           navigate('/');
         }
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     }else{
       alert('Enter Empty Fields');

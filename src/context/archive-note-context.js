@@ -36,10 +36,11 @@ const ArchiveContextProvider = ({children}) => {
         })
         if(response.status === 200 ){
             setArchiveNotes(response.data.archives);
+
         }
         
     } catch (err) {
-        console.log(err);
+        console.error(err);
     }
    }
 
@@ -71,7 +72,7 @@ const ArchiveContextProvider = ({children}) => {
             })
             setArchiveNotes(response.data.archives);
         } catch (err) {
-            console.log(err);
+            console.error(err);
         }
        }
        getArchiveNotes();

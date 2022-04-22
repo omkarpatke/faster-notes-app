@@ -1,13 +1,11 @@
 import './NotesPage.css';
-import { useNote } from '../../context/note-context';
+import { useArchiveNote, useToastContext, useTrashContext, useNote } from '../../context/index';
 
-import { useArchiveNote } from '../../context/archive-note-context';
-import { useToastContext } from '../../context/toastContext';
-
-export default function NotesPage() {
+export function NotesPage() {
   const { notes , setNotes , addNoteToBackend ,pinNotes , setPinNotes , deleteNote } = useNote();
-  const { addToArchiveNotes } = useArchiveNote();
+  const  { addToArchiveNotes }  = useArchiveNote();
   const notify = useToastContext();
+  const { trashDispatch }  = useTrashContext();
 
 
    const changeBgColor = (note,e) => {
@@ -24,14 +22,19 @@ export default function NotesPage() {
     setPinNotes( prev => prev.filter( prevNote => prevNote._id !== note._id ));
   }
 
+  const deletePinnedNote = (note) => {
+    setPinNotes( prev => prev.filter( prevNote => prevNote._id !== note._id ));
+  }
+
   const addNoteToArchive = (note) => {
     addToArchiveNotes(note);
     notify('Added Note In Archive' , {type:'success'})
   }
 
   const deleteNoteFromBackend =(note) => {
+      trashDispatch({ type: "ADD_TO_TRASH", payload: note });
       deleteNote(note);
-      notify('Deleted Note Successfully!' , {type:'success'})
+      notify('Added Note In Trash!' , {type:'success'})
   }
 
    
@@ -51,9 +54,9 @@ export default function NotesPage() {
             <span className="note-icons">
                 <input type="color" className='bg-input' title='Add Background'/>
                 <i className="lni lni-write" title='Edit Note'></i>
-                <i onClick={() => addToArchiveNotes(pinNote)} className="lni lni-archive" title='Add to Archive'></i>
+                <i onClick={() => addNoteToArchive(pinNote)} className="lni lni-archive" title='Add to Archive'></i>
                 <i className="lni lni-tag" title='Add Label'></i>
-                <i onClick={() => deleteNote(pinNote)} className="lni lni-trash-can" title='Remove Note'></i>
+                <i onClick={() => deletePinnedNote(pinNote)} className="lni lni-trash-can" title='Remove Note'></i>
             </span>
             </div>
         </div>

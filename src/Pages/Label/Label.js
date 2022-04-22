@@ -2,7 +2,7 @@ import React from 'react';
 import './Label.css';
 import PinImg from '../../Images/pin.svg';
 
-export default function Label() {
+export function Label() {
   return (
     <>
     <div className="notes-container">

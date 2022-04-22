@@ -40,7 +40,7 @@ const NoteContextProvider = ({children}) => {
                 }
             })
         } catch (err) {
-            console.log(err);
+            console.error(err);
         }
     }
 
@@ -51,7 +51,7 @@ const NoteContextProvider = ({children}) => {
            , {note})
           }
         catch (err) {
-          console.log(err)
+          console.error(err)
         }
    }
    
@@ -68,7 +68,7 @@ const NoteContextProvider = ({children}) => {
                 })
                 setNotes(response.data.notes);
             } catch (err) {
-                console.log(err);
+                console.error(err);
             }
         }
         getNotes();

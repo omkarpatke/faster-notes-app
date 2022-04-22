@@ -5,7 +5,7 @@ import { useNote } from '../../context/note-context';
 import { useToastContext } from '../../context/toastContext';
 
 
-export default function Sidebar() {
+export function Sidebar() {
     const { isLogin , addNoteToBackend } = useNote();
     const [showForm , setShowForm] = useState(false);
     const [title , setTitle] = useState('');
@@ -13,7 +13,10 @@ export default function Sidebar() {
     const notify = useToastContext();
 
     const activeStyle = ({isActive}) =>  {
-        return {fontWeight : isActive ? "600" : "500"}
+        return {
+          fontWeight : isActive ? "600" : "500",
+          backgroundColor: isActive ? '#c8c8c8' : '',
+        }
     }
     
     const createNewNote = () => isLogin ? setShowForm(true) : notify("Please Login!" , {type:'info'});
@@ -53,8 +56,6 @@ export default function Sidebar() {
       <NavLink to='/' style={activeStyle} className='sidebar-link'><i className="lni lni-home"></i>  Home</NavLink>
       <NavLink to='/archive' style={activeStyle} className='sidebar-link'><i className="lni lni-archive"></i>  Archive</NavLink>
       <NavLink to='/trash' style={activeStyle} className='sidebar-link'><i className="lni lni-trash-can"></i>  Trash</NavLink>
-      <NavLink to='/label' style={activeStyle} className='sidebar-link'><i className="lni lni-tag"></i>  Label</NavLink>
-      <NavLink to='/account' style={activeStyle} className='sidebar-link'><i className="lni lni-user"></i>  Account</NavLink>
       <button className='create-note-btn' onClick={createNewNote}>Create New Note</button>
     </div>
     </>
