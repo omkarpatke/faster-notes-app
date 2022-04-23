@@ -36,7 +36,7 @@ export function Sidebar() {
       const note = {
         title,
         desc,
-        bgColor: '',
+        bgColor: '#0w23',
         time:new Date().toLocaleString(),
       }
       setTitle('');
@@ -53,7 +53,7 @@ export function Sidebar() {
        const note = {
         title,
         desc,
-        bgColor: '',
+        bgColor: '#fff',
         time:new Date().toLocaleString(),
       }
        const encodedToken = localStorage.getItem('token');
