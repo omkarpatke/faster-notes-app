@@ -9,8 +9,13 @@ const useNote = () => useContext(NoteContext);
 
 
 const NoteContextProvider = ({children}) => {
+    const [showForm , setShowForm] = useState(false);
+    const [isEditNoteForm , setIsEditNoteForm] = useState(false);
+    const [title , setTitle] = useState('');
+    const [desc , setDesc] = useState('');
 
     const reducer = (accu , action) => {
+        
         switch(action.type){
             case 'ADD_NOTE':
                 return {...accu , payload : action.payload}
@@ -20,6 +25,10 @@ const NoteContextProvider = ({children}) => {
     
             case 'ARCHIVE_NOTE':
                 return {...accu , payload : action.payload}
+
+            case 'EDIT_NOTE_ID':
+                console.log(action);
+                return {...accu , noteId : action.payload}
             
             default :
                  return {...accu}
@@ -29,6 +38,7 @@ const NoteContextProvider = ({children}) => {
     const { state , dispatch } = useReducer(reducer , {type:'' , payload:''});
     const [notes , setNotes] = useState([]);
     const [pinNotes , setPinNotes] = useState([]);
+    const [editNoteId , setEditNoteId] = useState('');
     const [isLogin , setIsLogin] = useState(false);
     
 
@@ -76,7 +86,7 @@ const NoteContextProvider = ({children}) => {
     
 
 
-    return (<NoteContext.Provider value={{deleteNote, state , pinNotes, setPinNotes, dispatch, notes, setNotes, isLogin, setIsLogin, addNoteToBackend }}>{children}</NoteContext.Provider>)
+    return (<NoteContext.Provider value={{isEditNoteForm, setIsEditNoteForm ,setDesc, desc, setTitle, title, showForm, setShowForm, deleteNote, state , pinNotes, setPinNotes, dispatch, notes, setNotes, isLogin, setIsLogin, addNoteToBackend, setEditNoteId , editNoteId }}>{children}</NoteContext.Provider>)
 }
 
 export {useNote , NoteContextProvider}

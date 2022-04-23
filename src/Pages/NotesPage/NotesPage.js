@@ -2,11 +2,10 @@ import './NotesPage.css';
 import { useArchiveNote, useToastContext, useTrashContext, useNote } from '../../context/index';
 
 export function NotesPage() {
-  const { notes , setNotes , addNoteToBackend ,pinNotes , setPinNotes , deleteNote } = useNote();
+  const { setEditNoteId , notes , setNotes , addNoteToBackend ,pinNotes , setPinNotes , deleteNote , setShowForm , setTitle , setDesc , setIsEditNoteForm } = useNote();
   const  { addToArchiveNotes }  = useArchiveNote();
   const notify = useToastContext();
   const { trashDispatch }  = useTrashContext();
-
 
    const changeBgColor = (note,e) => {
        setNotes(prev => prev.map( prevNote => prevNote._id === note._id ? { ...note , bgColor: e.target.value } : { ...note , bgColor: '' }))
@@ -37,7 +36,14 @@ export function NotesPage() {
       notify('Added Note In Trash!' , {type:'success'})
   }
 
-   
+  const editNote = (note) => {
+    setShowForm(true);
+    setIsEditNoteForm(false);
+    setTitle(note.desc);
+    setDesc(note.title);
+    setEditNoteId(note._id);
+  }
+
 
   return (
     <>
@@ -53,9 +59,6 @@ export function NotesPage() {
             <div className="note-date">{pinNote.time} 
             <span className="note-icons">
                 <input type="color" className='bg-input' title='Add Background'/>
-                <i className="lni lni-write" title='Edit Note'></i>
-                <i onClick={() => addNoteToArchive(pinNote)} className="lni lni-archive" title='Add to Archive'></i>
-                <i className="lni lni-tag" title='Add Label'></i>
                 <i onClick={() => deletePinnedNote(pinNote)} className="lni lni-trash-can" title='Remove Note'></i>
             </span>
             </div>
@@ -73,7 +76,7 @@ export function NotesPage() {
           <div className="note-date">{note.time} 
           <span className="note-icons">
               <input type="color" className='bg-input' title='Add Background' onChange={(e) => changeBgColor(note,e)}/>
-              <i className="lni lni-write" title='Edit Note'></i>
+              <i onClick={() => editNote(note)} className="lni lni-write" title='Edit Note'></i>
               <i onClick={() => addNoteToArchive(note)} className="lni lni-archive" title='Add to Archive'></i>
               <i className="lni lni-tag" title='Add Label'></i>
               <i onClick={() => deleteNoteFromBackend(note)} className="lni lni-trash-can" title='Remove Note'></i>

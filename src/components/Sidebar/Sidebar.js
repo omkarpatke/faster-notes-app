@@ -1,4 +1,5 @@
-import React , {useState} from 'react';
+import React from 'react';
+import axios from 'axios';
 import './Sidebar.css';
 import { NavLink } from 'react-router-dom'
 import { useNote } from '../../context/note-context';
@@ -6,12 +7,8 @@ import { useToastContext } from '../../context/toastContext';
 
 
 export function Sidebar() {
-    const { isLogin , addNoteToBackend } = useNote();
-    const [showForm , setShowForm] = useState(false);
-    const [title , setTitle] = useState('');
-    const [desc , setDesc] = useState('');
+    const {editNoteId,  isLogin , addNoteToBackend , showForm , setShowForm , title , setTitle, desc , setDesc , isEditNoteForm, setIsEditNoteForm } = useNote();
     const notify = useToastContext();
-
     const activeStyle = ({isActive}) =>  {
         return {
           fontWeight : isActive ? "600" : "500",
@@ -19,8 +16,16 @@ export function Sidebar() {
         }
     }
     
-    const createNewNote = () => isLogin ? setShowForm(true) : notify("Please Login!" , {type:'info'});
-    
+    const createNewNote = () => {
+    if(isLogin){
+      setShowForm(true);
+      setIsEditNoteForm(true);
+      setTitle('');
+      setDesc('');
+     }else{
+      notify("Please Login!" , {type:'info'});
+     }
+    }
 
     const closeForm = () => {
       setShowForm(false);
@@ -40,16 +45,40 @@ export function Sidebar() {
       setTimeout(() => {
         closeForm();
       },200) 
-   }
+     }
+
+     const editNote = async(e) => {
+       e.preventDefault();
+       setIsEditNoteForm(false);
+       const note = {
+        title,
+        desc,
+        bgColor: '',
+        time:new Date().toLocaleString(),
+      }
+       const encodedToken = localStorage.getItem('token');
+       await axios({
+        method: "post",
+        url: `/api/notes/${editNoteId}`,
+        headers: { authorization: encodedToken },
+        data: {note},
+      });
+      setTimeout(() => {
+        closeForm();
+      },100) 
+     }
    
   return (
     <>
     <form className="add-note-cart" style={{display: showForm ? 'flex' : 'none'}}>
       <div className="close-btn" onClick={closeForm}>X</div>
-          <h2 className='form-heading'>Add Note</h2>
+           <h2 className='form-heading'>{isEditNoteForm ? 'Add Note' : 'Edit Note'}</h2>
            <input className='title-input' value={title} onChange={(e) => setTitle(e.target.value)}  type="text" name="title" id="title" placeholder='Title' />
            <textarea className='note-description-input' value={desc} onChange={(e) => setDesc(e.target.value)} name="note-description" id="note-description" cols="15" rows="5" placeholder='Note Description...'></textarea>
-           <button className='add-note-btn' onClick={(e) => addNote(e)}>Add Note</button>
+            {isEditNoteForm 
+            ? <button className='add-note-btn' onClick={(e) => addNote(e)}>Add Note</button>
+            : <button className='add-note-btn' onClick={(e) => editNote(e)}>Edit Note</button> 
+            }  
     </form>
 
     <div className="sidebar">
@@ -61,3 +90,4 @@ export function Sidebar() {
     </>
   )
 }
+
