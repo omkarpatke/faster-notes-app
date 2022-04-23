@@ -40,8 +40,8 @@ export function NotesPage() {
   const editNote = (note) => {
     setShowForm(true);
     setIsEditNoteForm(false);
-    setTitle(note.desc);
-    setDesc(note.title);
+    setTitle(note.title);
+    setDesc(note.desc);
     setEditNoteId(note._id);
   }
 
