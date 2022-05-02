@@ -47,7 +47,7 @@ const NoteContextProvider = ({children}) => {
        }else{
            setIsLogin(false);
        }
-    },[window.location.reload])
+    },[]);
     
 
     const addNoteToBackend = async(note) => {
