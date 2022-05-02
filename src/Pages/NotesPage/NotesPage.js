@@ -8,7 +8,7 @@ export function NotesPage() {
   const { trashDispatch }  = useTrashContext();
 
    const changeBgColor = (note,e) => {
-       setNotes(prev => prev.map( prevNote => prevNote._id === note._id ? { ...note , bgColor: e.target.value } : { ...note , bgColor: '#fff' }));   
+       setNotes(prev => ([...prev].map(prevNote => prevNote._id === note._id ? { ...note , bgColor: e.target.value } : note)));   
    }
 
    const addToPinNotes = (note) => {

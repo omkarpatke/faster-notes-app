@@ -40,6 +40,14 @@ const NoteContextProvider = ({children}) => {
     const [pinNotes , setPinNotes] = useState([]);
     const [editNoteId , setEditNoteId] = useState('');
     const [isLogin , setIsLogin] = useState(false);
+
+    useEffect(() => {
+       if(localStorage.getItem('token')){
+           setIsLogin(true);
+       }else{
+           setIsLogin(false);
+       }
+    },[window.reload])
     
 
     const addNoteToBackend = async(note) => {
