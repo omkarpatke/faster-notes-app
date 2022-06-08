@@ -20,6 +20,8 @@ const ArchiveContextProvider = ({children}) => {
         });
         if(response.status === 201){
             setArchiveNotes(response.data.archives);
+        }else{
+            notify("Something Went Wrong" , {type:'error'});
         }   
     } catch (err) {
         console.error(err);
