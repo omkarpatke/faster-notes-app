@@ -27,3 +27,11 @@
 .create-note-btn:hover{
     background-color: var(--primary-dark-color);
 }
+
+.label-input{
+    min-height: 3rem;
+    max-height: auto;
+    padding-left: 1rem;
+    width: 25rem;
+    font-size: 1rem;
+}

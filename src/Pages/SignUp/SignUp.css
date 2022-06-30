@@ -4,11 +4,12 @@
     flex-direction: column;
     justify-content:center;
     align-items: center;
-    height: 111vh;
+    margin: 5px auto;
+    background: var(--gray-bg-color);
 }
 
 .login-container h3{
-    padding-top: 1rem;
+    margin-top: 3rem;
     font-size: 1.8rem;
 }
 
@@ -18,7 +19,7 @@
     justify-content:center;
     align-items: center;
     padding: 1rem 3rem 2rem 3rem;
-    margin: 1rem 3rem;
+    margin: 3rem 3rem;
     border-radius: 10px;
     box-shadow: 1px 1px 10px 10px rgba(0,0,0,0.1);
     background-color: var(--white-color);
@@ -67,7 +68,7 @@
 .login-btn{
     padding: 8px 2.4rem;
     width: max-content;
-    margin: 3px auto;
+    margin: 0 auto;
     border-radius: 1rem;
     border: none;
     font-size: 1rem;
@@ -75,10 +76,11 @@
     color: var(--white-color);
     transition: .8s all ease-in-out;
     cursor: pointer;
+    margin-top: 10px;
 }
 
 .login-btn:hover{
-    background-color: #000;
+    background-color: var(--black-color);
 }
 
 .signUp-with-google-btn{
@@ -93,11 +95,30 @@
     transition: .8s all ease-in-out;
 }
 
-.signUp-with-google-btn span{
+.signUp-with-google-btn:hover{
+    background-color: var(--black-color);
     color: var(--white-color);
 }
 
-.signUp-with-google-btn:hover{
-    background-color: var(--facebook-bg-color);
-    color: var(--white-color);
+#login-password{
+    position: relative;
 }
+
+
+
+.error-notice{
+    color: red;
+    font-size: 12px;
+}
+
+.password-input-container{
+    display: flex;
+    flex-direction: column;
+}
+
+ .eyeIcon{
+    position: absolute;
+     /* top: 66.5%;
+    left: 57.5%;
+    font-size: 1.1rem;  */
+} 

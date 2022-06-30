@@ -1,24 +1,33 @@
 import './NotesPage.css';
-import { useArchiveNote, useToastContext, useTrashContext, useNote } from '../../context/index';
+import {  useToastContext, useNote } from '../../context/index';
+import { useSelector , useDispatch } from 'react-redux';
+import { addNoteToArchive } from '../../store/archiveNoteSlice';
+import { addNoteToBackend, getFilteredNotes, removeNote, setNoteColor } from '../../store/notesSlice';
+import { addToTrash } from '../../store/trashNotesSlice';
+import { useState } from 'react';
+import { Sidebar } from '../../components';
 
 export function NotesPage() {
-  const { setEditNoteId , notes , setNotes , addNoteToBackend ,pinNotes , setPinNotes , deleteNote , setShowForm , setTitle , setDesc , setIsEditNoteForm } = useNote();
-  const  { addToArchiveNotes }  = useArchiveNote();
+  const { setEditNoteId ,pinNotes , setPinNotes,  setShowForm , setTitle , setDesc , setIsEditNoteForm } = useNote();
   const notify = useToastContext();
-  const { trashDispatch }  = useTrashContext();
+  const dispatch = useDispatch();
+  
+  const { notes } = useSelector(state => state);
 
-   const changeBgColor = (note,e) => {
-       setNotes(prev => ([...prev].map(prevNote => prevNote._id === note._id ? { ...note , bgColor: e.target.value } : note)));   
+ 
+
+   const changeBgColor = (note,color) => {
+       dispatch(setNoteColor({note , color}));   
    }
 
    const addToPinNotes = (note) => {
-     deleteNote(note);
+     dispatch(removeNote(note));
      setPinNotes([...pinNotes , note])
    }
 
 
    const unPinnedNote = (note) => {
-    addNoteToBackend(note);
+    dispatch(addNoteToBackend(note));
     setPinNotes( prev => prev.filter( prevNote => prevNote._id !== note._id ));
   }
 
@@ -26,14 +35,9 @@ export function NotesPage() {
     setPinNotes( prev => prev.filter( prevNote => prevNote._id !== note._id ));
   }
 
-  const addNoteToArchive = (note) => {
-    addToArchiveNotes(note);
-    notify('Added Note In Archive' , {type:'success'})
-  }
-
   const deleteNoteFromBackend =(note) => {
-      trashDispatch({ type: "ADD_TO_TRASH", payload: note });
-      deleteNote(note);
+      dispatch(removeNote(note));
+      dispatch(addToTrash(note));
       notify('Added Note In Trash!' , {type:'success'})
   }
 
@@ -46,10 +50,15 @@ export function NotesPage() {
   }
 
 
+
   return (
     <>
+      <div className='notepage-container'>
+      <Sidebar/>
     <div className="notes-container">
-        <input className='search-bar' type="search" name="search" id="search" placeholder='Search...' />
+        <input className='search-bar' type="search" name="search" id="search" placeholder='Search...' onChange={(e) => {
+          dispatch(getFilteredNotes(e.target.value));
+        }} />
         <h3>PINNED</h3>
         <div className="pinned-notes">
           {pinNotes.length === 0  ? "No Pinned Notes" : pinNotes.map((pinNote , index) => (
@@ -76,10 +85,13 @@ export function NotesPage() {
           <div className="desc">{note.desc}</div>
           <div className="note-date">{note.time} 
           <span className="note-icons">
-              <input type="color" className='bg-input' title='Add Background' onChange={(e) => changeBgColor(note,e)}/>
+              <input type="color" className='bg-input' title='Add Background' onChange={(e) => changeBgColor(note,e.target.value)}/>
               <i onClick={() => editNote(note)} className="lni lni-write" title='Edit Note'></i>
-              <i onClick={() => addNoteToArchive(note)} className="lni lni-archive" title='Add to Archive'></i>
-              <i className="lni lni-tag" title='Add Label'></i>
+              <i onClick={() => {
+                dispatch(addNoteToArchive(note));
+                dispatch(removeNote(note));
+                notify('Added Note In Archive' , {type:'success'});
+              }} className="lni lni-archive" title='Add to Archive'></i>
               <i onClick={() => deleteNoteFromBackend(note)} className="lni lni-trash-can" title='Remove Note'></i>
           </span>
           </div>
@@ -87,7 +99,7 @@ export function NotesPage() {
         ))}
 
         </div>
-
+        </div>
     </div>
  
     </>

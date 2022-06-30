@@ -4,12 +4,12 @@
     flex-direction: column;
     justify-content:center;
     align-items: center;
-    min-height: 100vh;
-    max-height: auto;
+    margin: 1rem auto;
+    background: var(--gray-bg-color);
 }
 
 .login-heading{
-    padding-top: 2rem;
+    margin-top: 3rem;
     font-size: 1.8rem;
 }
 
@@ -25,7 +25,7 @@
     background-color: var(--white-color);
     cursor: pointer;
     transition: .3s all ease-in-out;
-    line-height: 2;
+    line-height: 2.5;
     text-align: initial;
 }
 
@@ -67,7 +67,7 @@
 .login-btn{
     padding: 8px 2.4rem 8px 2.4rem;
     width: max-content;
-    margin: 3px auto;
+    margin: 0 auto;
     border-radius: 1rem;
     border: none;
     font-size: 1rem;
@@ -78,7 +78,9 @@
 }
 
 .login-btn:hover{
-    background-color: var(--black-color);
+    color: var(--primary-color);
+    background-color: var(--white-color);
+    border: 1px solid var(--primary-color);
 }
 
 .signIn-with-google-btn{
@@ -93,10 +95,19 @@
     transition: .8s all ease-in-out;
 }
 
-.signInWithGoogleBtnText{
-    color: var(--white-color);
-}
+
 
 .signIn-with-google-btn:hover{
-    background-color: var(--facebook-bg-color);
+    background-color: var(--black-color);
+}
+
+.password-input{
+    position: relative;
+}
+
+.eye-icon{
+    position: absolute;
+    top: 52%;
+    left: 56%;
+    font-size: 1.1rem;
 }

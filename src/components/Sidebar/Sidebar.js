@@ -1,14 +1,18 @@
 import React from 'react';
-import axios from 'axios';
 import './Sidebar.css';
 import { NavLink } from 'react-router-dom'
 import { useNote } from '../../context/note-context';
 import { useToastContext } from '../../context/toastContext';
+import {v4 as uuid} from 'uuid';
+import { useDispatch , useSelector } from 'react-redux';
+import { addNoteToBackend, editNotes } from '../../store/notesSlice';
 
 
 export function Sidebar() {
-    const {editNoteId,  isLogin , addNoteToBackend , showForm , setShowForm , title , setTitle, desc , setDesc , isEditNoteForm, setIsEditNoteForm } = useNote();
+    const {editNoteId,  isLogin, showForm , setShowForm , title , setTitle, desc , setDesc , isEditNoteForm, setIsEditNoteForm } = useNote();
     const notify = useToastContext();
+    const dispatch = useDispatch();
+
     const activeStyle = ({isActive}) =>  {
         return {
           fontWeight : isActive ? "600" : "500",
@@ -34,6 +38,7 @@ export function Sidebar() {
    const addNote = (e) => {
      e.preventDefault();
       const note = {
+        _id: uuid(),
         title,
         desc,
         bgColor: '#0w23',
@@ -41,14 +46,14 @@ export function Sidebar() {
       }
       setTitle('');
       setDesc('');
-      addNoteToBackend(note);
+      dispatch(addNoteToBackend(note));
       setTimeout(() => {
         closeForm();
       },200) 
      }
 
-     const editNote = async(e) => {
-       e.preventDefault();
+     const editNote = (e) => {
+      e.preventDefault();
        setIsEditNoteForm(false);
        const note = {
         title,
@@ -56,13 +61,7 @@ export function Sidebar() {
         bgColor: '#fff',
         time:new Date().toLocaleString(),
       }
-       const encodedToken = localStorage.getItem('token');
-       await axios({
-        method: "post",
-        url: `/api/notes/${editNoteId}`,
-        headers: { authorization: encodedToken },
-        data: {note},
-      });
+      dispatch(editNotes({note , editNoteId}));
       setTimeout(() => {
         closeForm();
       },100) 

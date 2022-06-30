@@ -13,6 +13,7 @@ export function SignUp() {
   const navigate = useNavigate();
   const { setIsLogin } = useNote();
   const notify = useToastContext();
+  const [showPassword , setShowPassword] = useState(false); 
 
   const signupHandler = async (e) => {
     e.preventDefault();
@@ -35,7 +36,8 @@ export function SignUp() {
         console.error(error);
       }
     }else{
-      alert('Enter Empty Fields');
+      setShowPassword(true);
+      notify('Enter Empty Fields',{type:'warning'});
     }
     
   };
@@ -47,22 +49,34 @@ export function SignUp() {
             <h2>Sign Up</h2>
             <form className="logIn-form">
                 <label htmlFor="first-name" aria-required="true">First Name<span>*</span></label>
-                <input type="text" name="first-name" id="first-name" value={name} onChange={ e => setName(e.target.value)}/>
+                <input type="text" placeholder='John' name="first-name" required id="first-name" value={name} onChange={ event => setName(event.target.value)}/>
+                {showPassword && name.length<=0
+                ? <p className="error-notice">First Name Can't be Empty!</p>
+                :''}
+                
 
                 <label htmlFor="last-name" aria-required="true"> Last Name<span>*</span></label>
-                <input type="text" name="last-name" id="last-name" value={lastName} onChange={ e => setLastName(e.target.value)}/>
+                <input type="text" placeholder='Cena' name="last-name" required id="last-name" value={lastName} onChange={ event => setLastName(event.target.value)}/>
+                {showPassword && lastName.length<=0
+                ? <p className="error-notice">Last Name Can't be Empty!</p>
+                :''}
 
                 <label htmlFor='login-eamil-input' aria-required="true">E-mail address<span>*</span></label>
-                <input type="email" name="user-email" id="login-eamil-input" value={email} onChange={ e => setEmail(e.target.value)}/>
-
+                <input type="email" placeholder='johncena@gmail.com' name="user-email" required id="login-eamil-input" value={email} onChange={ event => setEmail(event.target.value)}/>
+                {showPassword && email.length<=0
+                ? <p className="error-notice">Email Can't be Empty!</p>
+                :''}
+                <div className='password-input-container'>
                 <label htmlFor="login-password" aria-required="true">Password<span>*</span></label>
-                <input type="password" name="login-password" id="login-password" value={password} onChange={ e => setPassword(e.target.value)}/>
+                <input className='password-input' type={"password"} placeholder='********' name="login-password" required id="login-password" value={password} onChange={ event => setPassword(event.target.value)}/>
+                {showPassword && password.length<=0
+                ? <p className="error-notice">Password Can't be Empty!</p>
+                :''} 
+                </div>
 
-                <button className="login-btn" type="submit" onClick={(e) => signupHandler(e)}> Sign Up </button>
+                <button className="login-btn" type="submit" onClick={(event) => signupHandler(event)}> Sign Up </button>
             </form>
             <Link to="/login">Already have an Account?</Link>
-            <h2>OR</h2>
-            <button className="signUp-with-google-btn"><i className="lni lni-google"></i> <span>Sign in with google</span></button>
         </div>
     </div>
     </>
