@@ -4,7 +4,6 @@ import { useSelector , useDispatch } from 'react-redux';
 import { addNoteToArchive } from '../../store/archiveNoteSlice';
 import { addNoteToBackend, getFilteredNotes, removeNote, setNoteColor } from '../../store/notesSlice';
 import { addToTrash } from '../../store/trashNotesSlice';
-import { useState } from 'react';
 import { Sidebar } from '../../components';
 
 export function NotesPage() {

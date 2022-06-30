@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { useNote } from '../../context/note-context';
 import { useToastContext } from '../../context/toastContext';
 import {v4 as uuid} from 'uuid';
-import { useDispatch , useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addNoteToBackend, editNotes } from '../../store/notesSlice';
 
 
