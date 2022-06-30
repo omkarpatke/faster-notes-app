@@ -1,4 +1,3 @@
-export { Account } from './Account/Account';
 export { Archive } from './archivePage/archive';
 export { HomePage } from './Homepage/HomePage';
 export { Label } from './Label/Label';

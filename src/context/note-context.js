@@ -72,6 +72,15 @@ const NoteContextProvider = ({children}) => {
           console.error(err)
         }
    }
+
+   const deleteAllNotes = async() => {
+    try{ 
+      await axios.delete(`/api/notes` , {headers : {authorization : encodedToken}})
+      }
+    catch (err) {
+      console.error(err)
+    }
+}
    
     
     const encodedToken = localStorage.getItem('token');
@@ -94,7 +103,7 @@ const NoteContextProvider = ({children}) => {
     
 
 
-    return (<NoteContext.Provider value={{isEditNoteForm, setIsEditNoteForm ,setDesc, desc, setTitle, title, showForm, setShowForm, deleteNote, state , pinNotes, setPinNotes, dispatch, notes, setNotes, isLogin, setIsLogin, addNoteToBackend, setEditNoteId , editNoteId }}>{children}</NoteContext.Provider>)
+    return (<NoteContext.Provider value={{deleteAllNotes ,isEditNoteForm, setIsEditNoteForm ,setDesc, desc, setTitle, title, showForm, setShowForm, deleteNote, state , pinNotes, setPinNotes, dispatch, notes, setNotes, isLogin, setIsLogin, addNoteToBackend, setEditNoteId , editNoteId }}>{children}</NoteContext.Provider>)
 }
 
 export {useNote , NoteContextProvider}
