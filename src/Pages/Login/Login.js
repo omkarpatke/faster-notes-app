@@ -36,8 +36,8 @@ export function Login() {
    }
 
     const loginAsGuest = () => {
-      setEmail('adarshbalika@gmail.com')
-      setPassword('adarshBalika123')
+      setEmail('guest1234@gmail.com');
+      setPassword('guest1234');
     };
 
   return (

@@ -31,14 +31,14 @@ export function Trash() {
   return (
     <>
      <div className='notepage-container'>
-      <Sidebar/>
+     <Sidebar showBtn={false}/>
     <div className="notes-container">
         <h3>Trash</h3>
         <div className="pinned-notes">
           {trashNotes.length === 0 ? "No Trash Notes" : trashNotes.map(note => (
             <div className="note" key={note._id} style={{backgroundColor : note.bgColor}}>
             <div className="title">{note.title}</div>
-            <div className="desc">{note.desc}</div>
+            <div className="desc" dangerouslySetInnerHTML={{ __html: note.desc }} ></div>
             <div className="note-date">{note.time} 
             <span className="note-icons">
                 <input type="color" className='bg-input' title='Add Background' onChange={(e) => changeBgColor(note,e.target.value)}/>

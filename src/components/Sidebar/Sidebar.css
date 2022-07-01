@@ -35,3 +35,13 @@
     width: 25rem;
     font-size: 1rem;
 }
+
+.labels{
+    display: flex;
+    gap: 1rem;
+}
+
+.priority{
+    display: flex;
+    gap: 1rem;
+}

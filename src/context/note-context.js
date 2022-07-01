@@ -13,6 +13,8 @@ const NoteContextProvider = ({children}) => {
     const [isEditNoteForm , setIsEditNoteForm] = useState(false);
     const [title , setTitle] = useState('');
     const [desc , setDesc] = useState('');
+    const [label , setLabel] = useState('');
+    const [priority , setPriority] = useState('');
 
     const reducer = (accu , action) => {
         
@@ -103,7 +105,7 @@ const NoteContextProvider = ({children}) => {
     
 
 
-    return (<NoteContext.Provider value={{deleteAllNotes ,isEditNoteForm, setIsEditNoteForm ,setDesc, desc, setTitle, title, showForm, setShowForm, deleteNote, state , pinNotes, setPinNotes, dispatch, notes, setNotes, isLogin, setIsLogin, addNoteToBackend, setEditNoteId , editNoteId }}>{children}</NoteContext.Provider>)
+    return (<NoteContext.Provider value={{label ,setLabel , priority, setPriority,deleteAllNotes ,isEditNoteForm, setIsEditNoteForm ,setDesc, desc, setTitle, title, showForm, setShowForm, deleteNote, state , pinNotes, setPinNotes, dispatch, notes, setNotes, isLogin, setIsLogin, addNoteToBackend, setEditNoteId , editNoteId }}>{children}</NoteContext.Provider>)
 }
 
 export {useNote , NoteContextProvider}

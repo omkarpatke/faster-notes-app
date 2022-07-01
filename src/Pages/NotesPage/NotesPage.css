@@ -20,7 +20,7 @@
     min-height: 10rem;
     max-height: auto;
     background-color: var(--white-color);
-    padding: 1rem 1rem;
+    padding: 1rem 3rem;
 }
 
 .pin-icon{
@@ -140,6 +140,7 @@
 
  .add-note-cart{
      display: none;
+     text-align: initial;
      z-index: 100;
      flex-direction: column;
      gap: 1rem;
@@ -147,8 +148,9 @@
      padding: 1rem 2rem 3rem 2rem;
      position: fixed;
      min-width: 25rem;
-     top: 21%;
-     left: 35%;
+     top: 14%;
+     left: 25%;
+     
      box-shadow: 6px 5px 30px 10px rgba(0,0,0,0.1);
  }
 
@@ -183,10 +185,47 @@
  }
 
  .close-btn{
-     margin-left: 22rem;
+     margin-left: 43rem;
  }
 
  .bg-input{
      cursor: pointer;
+ }
+
+ .labels-priorities{
+    display: flex;
+    gap: 1rem;
+ }
+
+ .label{
+    background: var(--bg-color);
+    padding: 0px 8px;
+    border-radius: 8px;
+ }
+
+ .filter-icon{
+    position: absolute;
+    left: 70rem;
+    cursor: pointer;
+ }
+
+ .filter-modal{
+    background-color: #cfe1f7;
+    display: flex;
+    padding: 15px 1rem;
+    flex-direction: column;
+    text-align: initial;
+    width: 18rem;
+    position: relative;
+    line-height: 2;
+    left: -32.5rem;
+    /* right: 33rem; */
+    bottom: -22px;
+    height: 11rem;
+    border-radius: 15px;
+ }
+
+ .hidden{
+    display: none;
  }
 
