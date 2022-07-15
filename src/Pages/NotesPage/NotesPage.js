@@ -59,7 +59,7 @@ export function NotesPage() {
     const sortedByOldAndLatest = sortByDate(filteredNotes , filter.latest);
     const sortedByLabels = filterByLabel(sortedByOldAndLatest , filter);
     setFilteredNotes(sortedByLabels);
-  },[filter , notes]);
+  },[filter , notes , filteredNotes]);
 
   const clearHandler = () => {
     setFilter({
