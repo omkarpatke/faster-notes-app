@@ -56,10 +56,10 @@ export function NotesPage() {
       }
     };
 
-    const sortedByOldAndLatest = sortByDate(filteredNotes , filter.latest);
+    const sortedByOldAndLatest = sortByDate(notes , filter.latest);
     const sortedByLabels = filterByLabel(sortedByOldAndLatest , filter);
     setFilteredNotes(sortedByLabels);
-  },[filter , notes , filteredNotes]);
+  },[filter , notes]);
 
   const clearHandler = () => {
     setFilter({
