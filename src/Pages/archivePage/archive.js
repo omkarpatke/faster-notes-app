@@ -26,7 +26,7 @@ export function Archive() {
           {archiveNotes.length === 0 ? "No Archive Notes" : archiveNotes.map((archiveNote) => (
              <div className="note" key={archiveNote._id} style={{backgroundColor : archiveNote.bgColor}}>
              <div className="title">{archiveNote.title}</div>
-             <div className="desc">{archiveNote.desc}</div>
+             <div className="desc" dangerouslySetInnerHTML={{ __html: archiveNote.desc}}></div>
              <div className="note-date">{archiveNote.time} 
              <span className="note-icons">
                  <input type="color" className='bg-input' title='Add Background' onChange={(e) => changeBgColor(archiveNote,e.target.value)} />

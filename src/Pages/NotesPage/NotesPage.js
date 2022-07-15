@@ -140,7 +140,7 @@ export function NotesPage() {
             <div className="note" key={index}>
             <div className="pinned-icon"><i className="lni lni-pin" style={{fontWeight:'1000'}} onClick={() => unPinnedNote(pinNote)}></i></div>
             <div className="title">{pinNote.title}</div>
-            <div className="desc">{pinNote.desc}</div>
+            <div className="desc" dangerouslySetInnerHTML={{ __html: pinNote.desc}}></div>
             <div className="note-date">{pinNote.time} 
             <span className="note-icons">
                 <input type="color" className='bg-input' title='Add Background'/>
@@ -157,7 +157,7 @@ export function NotesPage() {
           <div className="note" key={note._id} style={{backgroundColor:note.bgColor}}>
           <div className="pinned-icon"><i className="lni lni-pin" onClick={() => addToPinNotes(note)}></i></div>
           <div className="title">{note.title}</div>
-          <div className="desc">{note.desc}</div>
+          <div className="desc" dangerouslySetInnerHTML={{ __html: note.desc}}></div>
           <div className="label">{note.labels.home ? 'Home' : '' }{note.labels.food ? 'Food' : ''}{note.labels.office ? 'Work' : ''} </div>
           <div className="note-date">{note.time} 
           <span className="note-icons">
