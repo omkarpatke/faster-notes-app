@@ -1,17 +1,30 @@
 import './NotesPage.css';
+import { useState , useEffect } from 'react';
 import {  useToastContext, useNote } from '../../context/index';
 import { useSelector , useDispatch } from 'react-redux';
 import { addNoteToArchive } from '../../store/archiveNoteSlice';
-import { addNoteToBackend, getFilteredNotes, removeNote, setNoteColor } from '../../store/notesSlice';
+import { addNoteToBackend, removeNote, setNoteColor } from '../../store/notesSlice';
 import { addToTrash } from '../../store/trashNotesSlice';
 import { Sidebar } from '../../components';
 
 export function NotesPage() {
-  const { setEditNoteId ,pinNotes , setPinNotes,  setShowForm , setTitle , setDesc , setIsEditNoteForm } = useNote();
+  const { setEditNoteId, setShowForm , setTitle , setDesc , setIsEditNoteForm } = useNote();
   const notify = useToastContext();
   const dispatch = useDispatch();
-  
+  const [filteredNotes , setFilteredNotes] = useState([]);
   const { notes } = useSelector(state => state);
+  const [pinNotes , setPinNotes] = useState([]);
+
+  
+
+  function addFilteredNotes(items){
+    console.log(items);
+    setFilteredNotes(items);
+  }
+
+  useEffect(() => {
+    addFilteredNotes(notes);
+  },[notes]);
 
  
 
@@ -48,6 +61,14 @@ export function NotesPage() {
     setEditNoteId(note._id);
   }
 
+  const inputHandler = (e) => {
+    if(e.target.value.length > 0){
+     setFilteredNotes(prev => prev.filter(note => note.title.includes(e.target.value)));
+    }else{
+      setFilteredNotes(notes);
+    }
+  }
+
 
 
   return (
@@ -55,9 +76,7 @@ export function NotesPage() {
       <div className='notepage-container'>
       <Sidebar/>
     <div className="notes-container">
-        <input className='search-bar' type="search" name="search" id="search" placeholder='Search...' onChange={(e) => {
-          dispatch(getFilteredNotes(e.target.value));
-        }} />
+        <input className='search-bar' type="search" name="search" id="search" placeholder='Search...' onChange={(e) => inputHandler(e)} />
         <h3>PINNED</h3>
         <div className="pinned-notes">
           {pinNotes.length === 0  ? "No Pinned Notes" : pinNotes.map((pinNote , index) => (
@@ -77,7 +96,7 @@ export function NotesPage() {
         </div>
         <h3>OTHERS</h3>
         <div className="other-notes">
-        {notes.length === 0 ? "There is no notes" : notes.map((note) => (
+        {filteredNotes.length === 0 ? "There is no notes" : filteredNotes.map((note) => (
           <div className="note" key={note._id} style={{backgroundColor:note.bgColor}}>
           <div className="pinned-icon"><i className="lni lni-pin" onClick={() => addToPinNotes(note)}></i></div>
           <div className="title">{note.title}</div>

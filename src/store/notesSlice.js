@@ -5,7 +5,7 @@ const notesSlice = createSlice({
     initialState:[],
     reducers:{
         addNoteToBackend(state , action){
-            return [...state , action.payload];
+            return [action.payload , ...state];
         },
 
         removeNote(state, action){
