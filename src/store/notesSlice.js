@@ -5,7 +5,7 @@ const notesSlice = createSlice({
     initialState:[],
     reducers:{
         addNoteToBackend(state , action){
-            return [...state , action.payload];
+            return [action.payload , ...state];
         },
 
         removeNote(state, action){
@@ -17,7 +17,7 @@ const notesSlice = createSlice({
         },
 
         editNotes(state , action){
-            return [...state.map(item => item._id === action.payload.editNoteId ? {...item , title: action.payload.note.title , desc: action.payload.note.desc , time: action.payload.note.time , bgColor: action.payload.note.bgColor} : item)]
+            return [...state.map(item => item._id === action.payload.editNoteId ? {...item , title: action.payload.note.title , desc: action.payload.note.desc , time: action.payload.note.time , bgColor: action.payload.note.bgColor , labels: action.payload.note.labels} : item)]
         },
 
         setNoteColor(state , action){
