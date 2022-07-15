@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import { store } from './store/store';
 import { NoteContextProvider, ToastContextProvider } from "./context/index";
 
+
 // Call make Server
 makeServer();
 

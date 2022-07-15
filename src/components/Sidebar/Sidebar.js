@@ -6,12 +6,17 @@ import { useToastContext } from '../../context/toastContext';
 import {v4 as uuid} from 'uuid';
 import { useDispatch } from 'react-redux';
 import { addNoteToBackend, editNotes } from '../../store/notesSlice';
+import JoditEditor from "jodit-react";
 
 
 export function Sidebar() {
     const {editNoteId,  isLogin, showForm , labels , setLabels, setShowForm , title , setTitle, desc , setDesc , isEditNoteForm, setIsEditNoteForm } = useNote();
     const notify = useToastContext();
     const dispatch = useDispatch();
+
+    const config = {
+      buttons: [ "bold" , "italic" , "underline" , "link" , "unlink" , "source" , "ul" , "paragraph" ,"undo" , "redo"]
+    }
 
 
     const activeStyle = ({isActive}) =>  {
@@ -100,7 +105,7 @@ export function Sidebar() {
               setLabels({home:false,office:false,food:!labels.food})}} type="radio" name='label' id="food" />
            <label className='filterLabel' htmlFor="food">Food</label>
         </div>
-           <textarea className='note-description-input' value={desc} onChange={(e) => setDesc(e.target.value)} name="note-description" id="note-description" cols="15" rows="5" placeholder='Note Description...'></textarea>
+            <JoditEditor config={config} value={desc} onChange={e => setDesc(e)}  placeholder='Note Description...' />
             {isEditNoteForm 
             ? <button className='add-note-btn' onClick={(e) => addNote(e)}>Add Note</button>
             : <button className='add-note-btn' onClick={(e) => editNote(e)}>Edit Note</button> 

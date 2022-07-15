@@ -35,3 +35,7 @@
     width: 25rem;
     font-size: 1rem;
 }
+
+.jodit-status-bar{
+    visibility: hidden;
+}

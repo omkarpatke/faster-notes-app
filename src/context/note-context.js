@@ -15,6 +15,7 @@ const NoteContextProvider = ({children}) => {
     const [isLogin , setIsLogin] = useState(false);
     const [title , setTitle] = useState('');
     const [desc , setDesc] = useState('');
+    const [pinNotes , setPinNotes] = useState([]);
     const [labels , setLabels] = useState({
         home:false,
         office:false,
@@ -30,7 +31,7 @@ const NoteContextProvider = ({children}) => {
        }
     },[]);
     
-    return (<NoteContext.Provider value={{title , setTitle , desc ,labels,setLabels , setDesc, isEditNoteForm, setIsEditNoteForm , showForm, setShowForm, isLogin, setIsLogin, setEditNoteId , editNoteId }}>{children}</NoteContext.Provider>)
+    return (<NoteContext.Provider value={{title ,pinNotes , setPinNotes,  setTitle , desc ,labels,setLabels , setDesc, isEditNoteForm, setIsEditNoteForm , showForm, setShowForm, isLogin, setIsLogin, setEditNoteId , editNoteId }}>{children}</NoteContext.Provider>)
 }
 
 export {useNote , NoteContextProvider}
