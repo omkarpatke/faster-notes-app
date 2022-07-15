@@ -26,11 +26,11 @@ export function NotesPage() {
 
   useEffect(() => {
     const sortByDate = (allNotes, latest) => {
-      let sortedNotes = allNotes;
+      let sortedNotes;
       if (latest) {
         return notes;
       } else {
-        sortedNotes = sortedNotes.slice().reverse();
+         sortedNotes = allNotes.slice().sort((a,b) => new Date(a.time) - new Date(b.time));
         return sortedNotes;
       }
     };
