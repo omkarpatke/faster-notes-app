@@ -8,12 +8,11 @@ import { addToTrash } from '../../store/trashNotesSlice';
 import { Sidebar } from '../../components';
 
 export function NotesPage() {
-  const { setEditNoteId, setShowForm , setTitle ,setLabels, setDesc , setIsEditNoteForm } = useNote();
+  const { setEditNoteId, setShowForm ,pinNotes , setPinNotes, setTitle ,setLabels, setDesc , setIsEditNoteForm } = useNote();
   const notify = useToastContext();
   const dispatch = useDispatch();
   const [filteredNotes , setFilteredNotes] = useState([]);
   const { notes } = useSelector(state => state);
-  const [pinNotes , setPinNotes] = useState([]);
   const [toggle , setToggle] = useState(false);
   const [filter , setFilter] = useState({
     home:false,

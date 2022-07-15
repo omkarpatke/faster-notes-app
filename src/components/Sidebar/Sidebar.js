@@ -14,6 +14,10 @@ export function Sidebar() {
     const notify = useToastContext();
     const dispatch = useDispatch();
 
+    const config = {
+      buttons: [ "bold" , "italic" , "underline" , "link" , "unlink" , "source" , "ul" , "paragraph" ,"undo" , "redo"]
+    }
+
 
     const activeStyle = ({isActive}) =>  {
         return {
@@ -101,7 +105,7 @@ export function Sidebar() {
               setLabels({home:false,office:false,food:!labels.food})}} type="radio" name='label' id="food" />
            <label className='filterLabel' htmlFor="food">Food</label>
         </div>
-            <JoditEditor value={desc} onChange={e => setDesc(e)}  placeholder='Note Description...' />
+            <JoditEditor config={config} value={desc} onChange={e => setDesc(e)}  placeholder='Note Description...' />
             {isEditNoteForm 
             ? <button className='add-note-btn' onClick={(e) => addNote(e)}>Add Note</button>
             : <button className='add-note-btn' onClick={(e) => editNote(e)}>Edit Note</button> 

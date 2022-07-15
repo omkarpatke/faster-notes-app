@@ -80,7 +80,8 @@
 }
 
 .login-btn:hover{
-    background-color: var(--black-color);
+    color: var(--white-color);
+    background-color: var(--primary-color);
 }
 
 .signUp-with-google-btn{
