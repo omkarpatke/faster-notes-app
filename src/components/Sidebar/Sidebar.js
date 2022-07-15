@@ -9,9 +9,10 @@ import { addNoteToBackend, editNotes } from '../../store/notesSlice';
 
 
 export function Sidebar() {
-    const {editNoteId,  isLogin, showForm , setShowForm , title , setTitle, desc , setDesc , isEditNoteForm, setIsEditNoteForm } = useNote();
+    const {editNoteId,  isLogin, showForm , labels , setLabels, setShowForm , title , setTitle, desc , setDesc , isEditNoteForm, setIsEditNoteForm } = useNote();
     const notify = useToastContext();
     const dispatch = useDispatch();
+
 
     const activeStyle = ({isActive}) =>  {
         return {
@@ -26,6 +27,11 @@ export function Sidebar() {
       setIsEditNoteForm(true);
       setTitle('');
       setDesc('');
+      setLabels({
+        home:false,
+        office:false,
+        food:false
+      });
      }else{
       notify("Please Login!" , {type:'info'});
      }
@@ -41,11 +47,17 @@ export function Sidebar() {
         _id: uuid(),
         title,
         desc,
+        labels,
         bgColor: '#0w23',
         time:new Date().toLocaleString(),
       }
       setTitle('');
       setDesc('');
+      setLabels({
+        home:false,
+        office:false,
+        food:false
+      });
       dispatch(addNoteToBackend(note));
       setTimeout(() => {
         closeForm();
@@ -58,6 +70,7 @@ export function Sidebar() {
        const note = {
         title,
         desc,
+        labels,
         bgColor: '#fff',
         time:new Date().toLocaleString(),
       }
@@ -73,6 +86,20 @@ export function Sidebar() {
       <div className="close-btn" onClick={closeForm}>X</div>
            <h2 className='form-heading'>{isEditNoteForm ? 'Add Note' : 'Edit Note'}</h2>
            <input className='title-input' value={title} onChange={(e) => setTitle(e.target.value)}  type="text" name="title" id="title" placeholder='Title' />
+           <h3>Labels</h3>
+           <div className="priority">
+            <input checked={labels.home} onChange={() => {
+              
+              setLabels({home:!labels.home,office:false,food:false})}} type="radio" name='label' id="home" />
+           <label className='filterLabel' htmlFor="home">Home</label>
+            <input checked={labels.office} onChange={() => {
+              setLabels({home:false,office:!labels.office,food:false})}} type="radio" name='label' id="office" />
+           <label className='filterLabel' htmlFor="office">Office</label>
+            <input checked={labels.food} onChange={() => {
+             
+              setLabels({home:false,office:false,food:!labels.food})}} type="radio" name='label' id="food" />
+           <label className='filterLabel' htmlFor="food">Food</label>
+        </div>
            <textarea className='note-description-input' value={desc} onChange={(e) => setDesc(e.target.value)} name="note-description" id="note-description" cols="15" rows="5" placeholder='Note Description...'></textarea>
             {isEditNoteForm 
             ? <button className='add-note-btn' onClick={(e) => addNote(e)}>Add Note</button>
